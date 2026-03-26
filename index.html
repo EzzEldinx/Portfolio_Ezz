@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -18,9 +18,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
     
     <style>
-        /* Custom Fonts */
+        /* Custom Font */
         .font-tech { font-family: 'Space Grotesk', sans-serif; }
-        .font-logo { font-family: 'Syncopate', sans-serif; } /* New premium cinematic font */
 
         /* Stop scrolling while loading */
         body.loading-active { overflow: hidden !important; }
@@ -35,7 +34,7 @@
             height: 100vh;
             background-color: #000000;
             z-index: 99999;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 0.8s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -51,10 +50,10 @@
             z-index: 10;
             text-align: center;
             pointer-events: none;
-            transition: opacity 1.5s ease-in-out, transform 2s ease-in-out;
+            transition: opacity 1.2s ease-in-out, transform 1.5s ease-in-out;
         }
 
-        /* The Breathing Effect for the Logo */
+        /* Breathing Effect */
         .breathing-text {
             display: inline-block;
             animation: breathing 3s ease-in-out infinite;
@@ -62,10 +61,10 @@
 
         @keyframes breathing {
             0%, 100% { transform: scale(1); text-shadow: 0 0 15px rgba(225,29,72,0.4); }
-            50% { transform: scale(1.08); text-shadow: 0 0 30px rgba(225,29,72,1), 0 0 15px rgba(225,29,72,0.6); }
+            50% { transform: scale(1.05); text-shadow: 0 0 25px rgba(225,29,72,0.8), 0 0 10px rgba(225,29,72,0.5); }
         }
 
-        /* --- NEW: Glowing Animated Gradient Text --- */
+        /* Animated Gradient Text */
         .animated-gradient-text {
             background: linear-gradient(to right, #fda4af, #e11d48, #9f1239, #e11d48, #fda4af);
             background-size: 200% auto;
@@ -73,7 +72,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             animation: gradientMove 3s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(225,29,72,0.6)); /* The Glow */
+            filter: drop-shadow(0 0 8px rgba(225,29,72,0.5));
         }
 
         @keyframes gradientMove {
@@ -84,9 +83,9 @@
         /* --- MAIN SITE STYLES --- */
         #vanta-canvas { position: fixed; z-index: -2; top: 0; left: 0; width: 100vw; height: 100vh; }
         
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #881337; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #881337; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #9f1239; }
 
         .scrolling-image {
@@ -123,26 +122,49 @@
             0% { transform: translateX(0%); }
             100% { transform: translateX(-100%); }
         }
+
+        .footer-live-bg {
+            background: linear-gradient(-45deg, #000000, #3e0413, #000000, #5a061d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: #e11d48;
+            filter: blur(3px);
+            animation: floatParticle 6s ease-in-out infinite alternate;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(0) scale(1); opacity: 0.2; }
+            100% { transform: translateY(-20px) scale(1.5); opacity: 0.6; }
+        }
     </style>
 </head>
-<body class="font-sans antialiased flex flex-col min-h-screen relative selection:bg-rose-900 selection:text-white loading-active">
+<body class="font-tech antialiased flex flex-col min-h-screen relative selection:bg-rose-900 selection:text-white loading-active">
 
     <div id="loader-wrapper">
         <div id="loader-webgl"></div>
-        <div id="loading-text" class="loader-center-text">
+        <div id="loading-text" class="loader-center-text px-4 w-full">
             <h1 class="breathing-text text-white text-5xl md:text-7xl font-extrabold tracking-tighter mb-4">
-                E z z   E l d i n <span class="text-rose-600">.</span>
+                Ezz Eldin <span class="text-rose-600">.</span>
             </h1>
             <p class="text-rose-500/70 font-tech text-xs md:text-sm tracking-[0.4em] uppercase animate-pulse mt-2">
-                Engineering for dominance
+                Engineering for Dominance
             </p>
         </div>
     </div>
     <div id="vanta-canvas"></div>
 
-    <header class="fixed w-full top-6 z-50 flex justify-center px-4">
-        <div class="w-full max-w-5xl bg-black/70 backdrop-blur-lg border border-rose-900/50 rounded-full px-8 py-3 flex flex-wrap justify-between items-center shadow-[0_10px_30px_rgba(159,18,57,0.2)] relative">
-            <div class="font-logo text-xl tracking-widest text-white flex items-center gap-2 cursor-pointer z-50">
+    <header class="fixed w-full top-4 md:top-6 z-50 flex justify-center px-4">
+        <div class="w-full max-w-5xl bg-black/80 backdrop-blur-lg border border-rose-900/50 rounded-2xl md:rounded-full px-6 py-3 flex flex-wrap justify-between items-center shadow-[0_10px_30px_rgba(159,18,57,0.2)] relative">
+            <div class="text-xl font-extrabold tracking-tighter text-white flex items-center gap-2 cursor-pointer z-50">
                 <span class="text-rose-600 drop-shadow-[0_0_8px_rgba(159,18,57,0.8)]"><i class="fas fa-code text-sm"></i></span> EZZ.
             </div>
 
@@ -150,349 +172,340 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <nav id="mobile-menu" class="hidden md:flex absolute md:static top-full left-0 w-full md:w-auto bg-black/95 md:bg-transparent border border-rose-900/50 md:border-none rounded-2xl md:rounded-none mt-4 md:mt-0 p-6 md:p-0 flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 items-center z-40 transition-all shadow-xl md:shadow-none">
-                <a href="#hero" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-semibold text-sm tracking-widest uppercase">Home</a>
-                <a href="#skills" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-semibold text-sm tracking-widest uppercase">Skills</a>
-                <a href="#work" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-semibold text-sm tracking-widest uppercase">Work</a>
-                <a href="#contact" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-semibold text-sm tracking-widest uppercase">Contact</a>
+            <nav id="mobile-menu" class="hidden md:flex absolute md:static top-full left-0 w-full md:w-auto bg-black/95 md:bg-transparent border border-rose-900/50 md:border-none rounded-b-2xl md:rounded-none mt-3 md:mt-0 p-6 md:p-0 flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 items-center z-40 transition-all shadow-xl md:shadow-none">
+                <a href="#hero" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-sm tracking-widest uppercase">Home</a>
+                <a href="#skills" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-sm tracking-widest uppercase">Stack</a>
+                <a href="#work" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-sm tracking-widest uppercase">Work</a>
+                <a href="#contact" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-sm tracking-widest uppercase">Contact</a>
                 <a href="#contact" class="mobile-link md:hidden px-8 py-3 rounded-full bg-rose-700 hover:bg-rose-600 text-white text-sm font-bold transition-all mt-4 inline-block w-full text-center shadow-[0_0_15px_rgba(159,18,57,0.5)]">Hire Me</a>
             </nav>
 
-            <a href="#contact" class="hidden md:block px-5 py-2 rounded-full bg-rose-700 hover:bg-rose-600 text-white text-sm font-bold transition-all duration-300 shadow-[0_0_15px_rgba(159,18,57,0.5)] z-50">
+            <a href="#contact" class="hidden md:block px-6 py-2 rounded-full bg-rose-700 hover:bg-rose-600 text-white text-sm font-bold transition-all duration-300 shadow-[0_0_15px_rgba(159,18,57,0.5)] z-50">
                 Hire Me
             </a>
         </div>
     </header>
 
-    <main id="hero" class="container mx-auto px-6 pt-48 pb-16 min-h-screen flex flex-col items-center justify-center relative z-10 text-center">
+    <main id="hero" class="container mx-auto px-4 pt-36 md:pt-48 pb-16 min-h-screen flex flex-col items-center justify-center relative z-10 text-center">
         
-        <div class="inline-block px-5 py-1.5 rounded-full bg-rose-950/70 border border-rose-800/50 text-rose-300 text-xs font-bold mb-8 backdrop-blur-sm uppercase tracking-widest shadow-[0_0_15px_rgba(159,18,57,0.3)]">
+        <div class="inline-block px-4 py-1.5 rounded-full bg-rose-950/70 border border-rose-800/50 text-rose-300 text-[10px] md:text-xs font-bold mb-6 md:mb-8 backdrop-blur-sm uppercase tracking-widest shadow-[0_0_15px_rgba(159,18,57,0.3)]">
             <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span> Available for new projects
         </div>
         
-        <div class="inline-block max-w-full overflow-hidden mb-4">
-            <h1 class="typing-effect text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter">
-                I'm <span class="font-tech text-rose-600">Ezz Eldin</span>
+        <div class="inline-block max-w-full overflow-hidden mb-2 md:mb-4">
+            <h1 class="typing-effect text-3xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tighter">
+                I'm <span class="text-rose-600">Ezz Eldin</span>
             </h1>
         </div>
 
-        <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-10 tracking-tighter drop-shadow-lg leading-tight text-white max-w-4xl">
+        <h2 class="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-6 md:mb-10 tracking-tighter drop-shadow-lg leading-tight text-white max-w-4xl px-2">
             Architecting <span class="animated-gradient-text">Scalable</span> Digital Ecosystems.
         </h2>
         
-        <p class="text-base md:text-lg text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+        <p class="text-sm md:text-lg text-gray-400 mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md px-2">
             As a dedicated Full-Stack Software Engineer based in Alexandria, Egypt, I bridge the gap between design and complex backend logic. With a profound passion for clean code and performance optimization, I engineer highly interactive, robust, and scalable web applications that drive real business value and deliver seamless user journeys.
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-5 justify-center w-full sm:w-auto">
-            <a href="#work" class="px-8 py-4 rounded-full bg-rose-700 hover:bg-rose-600 text-white font-bold transition-all duration-300 shadow-[0_0_20px_rgba(159,18,57,0.4)] hover:shadow-[0_0_30px_rgba(159,18,57,0.6)] hover:-translate-y-1 w-full sm:w-auto text-center">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto px-4">
+            <a href="#work" class="px-6 md:px-8 py-3.5 md:py-4 rounded-full bg-rose-700 hover:bg-rose-600 text-white font-bold transition-all duration-300 shadow-[0_0_20px_rgba(159,18,57,0.4)] hover:shadow-[0_0_30px_rgba(159,18,57,0.6)] hover:-translate-y-1 w-full sm:w-auto text-center text-sm md:text-base">
                 Explore My Work <i class="fas fa-arrow-down ml-2"></i>
             </a>
-            <a href="#contact" class="px-8 py-4 rounded-full bg-black/60 hover:bg-rose-950/50 border border-rose-800 text-rose-300 font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-1 w-full sm:w-auto text-center">
+            <a href="#contact" class="px-6 md:px-8 py-3.5 md:py-4 rounded-full bg-black/60 hover:bg-rose-950/50 border border-rose-800 text-rose-300 font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-1 w-full sm:w-auto text-center text-sm md:text-base">
                 Get In Touch
             </a>
         </div>
     </main>
 
-    <div class="flex overflow-hidden bg-rose-950/40 backdrop-blur-sm border-y border-rose-900/50 py-4 z-10 whitespace-nowrap shadow-[0_0_20px_rgba(159,18,57,0.1)]">
+    <div class="flex overflow-hidden bg-rose-950/40 backdrop-blur-sm border-y border-rose-900/50 py-3 md:py-4 z-10 whitespace-nowrap shadow-[0_0_20px_rgba(159,18,57,0.1)]">
         <div class="animate-marquee inline-block">
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🚀 High-Performance Web Apps</span>
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">✨ Pixel-Perfect UI/UX</span>
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">⚡ Scalable Architecture</span>
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🛠️ Clean Code</span>
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🔥 Full-Stack Mastery</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🚀 High-Performance Web Apps</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">✨ Pixel-Perfect UI/UX</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">⚡ Scalable Architecture</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🛠️ Clean Code</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🔥 Full-Stack Mastery</span>
         </div>
         <div class="animate-marquee inline-block">
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🚀 High-Performance Web Apps</span>
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">✨ Pixel-Perfect UI/UX</span>
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">⚡ Scalable Architecture</span>
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🛠️ Clean Code</span>
-            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🔥 Full-Stack Mastery</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🚀 High-Performance Web Apps</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">✨ Pixel-Perfect UI/UX</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">⚡ Scalable Architecture</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🛠️ Clean Code</span>
+            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🔥 Full-Stack Mastery</span>
         </div>
     </div>
 
-    <section id="skills" class="py-24 relative z-10 bg-black/40 backdrop-blur-md">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-extrabold mb-4 text-white tracking-tight">
+    <section id="skills" class="py-20 md:py-24 relative z-10 bg-black/40 backdrop-blur-md">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white tracking-tight">
                 Tech <span class="animated-gradient-text">Stack</span>
             </h2>
-            <p class="text-gray-400 mb-14 max-w-2xl mx-auto">Technologies and tools I use to bring ideas to life.</p>
+            <p class="text-sm md:text-base text-gray-400 mb-10 md:mb-14 max-w-2xl mx-auto">Technologies and tools I use to bring ideas to life.</p>
             
-            <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4 max-w-5xl mx-auto">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
                     <i class="fab fa-react text-blue-400 text-lg"></i> React.js
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
                     <i class="fab fa-neos text-white text-lg"></i> Next.js
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-400 hover:shadow-[0_0_15px_rgba(74,222,128,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-400 hover:shadow-[0_0_15px_rgba(74,222,128,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
                     <i class="fab fa-vuejs text-green-500 text-lg"></i> Vue.js
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
                     <i class="text-blue-500 font-bold text-lg">TS</i> TypeScript
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-yellow-400 hover:shadow-[0_0_15px_rgba(250,204,21,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-yellow-400 hover:shadow-[0_0_15px_rgba(250,204,21,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
                     <i class="fab fa-js text-yellow-400 text-lg"></i> JavaScript
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
                     <i class="fab fa-css3-alt text-cyan-400 text-lg"></i> Tailwind CSS
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
                     <i class="fas fa-code-branch text-purple-500 text-lg"></i> Redux / Zustand
                 </div>
 
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fab fa-node-js text-green-500 text-lg"></i> Node.js
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-gray-300 hover:shadow-[0_0_15px_rgba(209,213,219,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-gray-300 hover:shadow-[0_0_15px_rgba(209,213,219,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fas fa-server text-gray-300 text-lg"></i> Express.js
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fab fa-python text-yellow-500 text-lg"></i> Python / Django
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-600 hover:shadow-[0_0_15px_rgba(22,163,74,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-600 hover:shadow-[0_0_15px_rgba(22,163,74,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fas fa-leaf text-green-600 text-lg"></i> MongoDB
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fas fa-database text-blue-400 text-lg"></i> PostgreSQL
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-indigo-400 hover:shadow-[0_0_15px_rgba(129,140,248,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-indigo-400 hover:shadow-[0_0_15px_rgba(129,140,248,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fas fa-layer-group text-indigo-400 text-lg"></i> Prisma ORM
                 </div>
 
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fab fa-git-alt text-orange-500 text-lg"></i> Git & GitHub
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-600 hover:shadow-[0_0_15px_rgba(37,99,235,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-600 hover:shadow-[0_0_15px_rgba(37,99,235,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fab fa-docker text-blue-600 text-lg"></i> Docker
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-orange-400 hover:shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-orange-400 hover:shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fab fa-aws text-orange-400 text-lg"></i> AWS
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-pink-500 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-pink-500 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fas fa-exchange-alt text-pink-500 text-lg"></i> REST & GraphQL
                 </div>
-                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-rose-500 hover:shadow-[0_0_15px_rgba(225,29,72,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-rose-500 hover:shadow-[0_0_15px_rgba(225,29,72,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
                     <i class="fab fa-figma text-rose-500 text-lg"></i> Figma
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="work" class="py-24 relative z-10 border-y border-rose-900/40 overflow-hidden">
+    <section id="work" class="py-20 md:py-24 relative z-10 border-y border-rose-900/40 overflow-hidden">
         
         <div id="vanta-work-bg" class="absolute inset-0 z-0"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-0 pointer-events-none"></div>
         
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-4xl font-extrabold text-center mb-4 text-white tracking-tight">
+        <div class="container mx-auto px-4 md:px-6 relative z-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-3 md:mb-4 text-white tracking-tight">
                 Selected <span class="animated-gradient-text">Works</span>
             </h2>
-            <p class="text-gray-300 text-center mb-16 max-w-2xl mx-auto drop-shadow-md">A showcase of scalable applications, seamless e-commerce, and modern interfaces.</p>
+            <p class="text-sm md:text-base text-gray-300 text-center mb-10 md:mb-16 max-w-2xl mx-auto drop-shadow-md">A showcase of scalable applications, seamless e-commerce, and modern interfaces.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
                 
-                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
                     
-                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                    <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/carta.png" alt="Carta Map" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
-                            <i class="fas fa-map-marked-alt text-5xl text-white/50"></i>
+                            <i class="fas fa-map-marked-alt text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
 
-                    <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Carta</h3>
-                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                    <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Carta</h3>
+                        <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             An interactive mapping interface for CEAlex, designed to handle complex spatial data visualization, geographical exploration, and dynamic rendering.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Node.js</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Linux</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Docker</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">React.js</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Leaflet/Mapbox</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Data Viz</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">REST API</span>
+                        <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Node.js</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Linux</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Docker</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">React.js</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Mapbox</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Tailwind</span>
                         </div>
-                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
-                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
                                 <i class="fab fa-github"></i> Code
                             </a>
-                            <a href="https://maps.cealex.org/carte" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
-                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            <a href="https://maps.cealex.org/carte" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
                     
-                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                    <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/badz.png" alt="Badz Store" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
-                            <i class="fas fa-shopping-bag text-5xl text-white/50"></i>
+                            <i class="fas fa-shopping-bag text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
 
-                    <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Badz Store</h3>
-                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                    <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Badz Store</h3>
+                        <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             A seamless e-commerce experience designed for high conversion rates. Features a sleek product gallery, cart state management, and secure checkout.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Next.js</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">TypeScript</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Redux/Context</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Payment Gateway</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Node.js</span>
+                        <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Next.js</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">TypeScript</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Redux</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Payments</span>
                         </div>
-                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
-                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
                                 <i class="fab fa-github"></i> Code
                             </a>
-                            <a href="https://badz-store.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
-                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            <a href="https://badz-store.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
                     
-                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                    <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/alpha.png" alt="Alpha Call Centers" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
-                            <i class="fas fa-headset text-5xl text-white/50"></i>
+                            <i class="fas fa-headset text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
 
-                    <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Alpha Call Centers</h3>
-                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                    <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Alpha Call Centers</h3>
+                        <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             Corporate website providing professional BPO and call center services, highly optimized for lead generation, SEO, and client onboarding.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Vue.js / Nuxt</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Node.js</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Linux</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Headless CMS</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">SEO Optimized</span>
+                        <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Vue.js / Nuxt</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Tailwind</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Node.js</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">CMS</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">SEO</span>
                         </div>
-                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
-                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
                                 <i class="fab fa-github"></i> Code
                             </a>
-                            <a href="https://alphacallcenters.com/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
-                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            <a href="https://alphacallcenters.com/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
                     
-                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                    <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/innovation.png" alt="Innovation Lab" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
-                            <i class="fas fa-lightbulb text-5xl text-white/50"></i>
+                            <i class="fas fa-lightbulb text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
 
-                    <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Innovation Lab</h3>
-                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                    <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Innovation Lab</h3>
+                        <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             A creative digital space showcasing innovative edges and modern web solutions with highly engaging animations and interactive UI/UX.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Next.js 14</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">TypeScript</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">GSAP / Animations</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Vercel Deploy</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Figma Design</span>
+                        <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Next.js 14</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">TypeScript</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">GSAP</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Tailwind</span>
                         </div>
-                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
-                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
                                 <i class="fab fa-github"></i> Code
                             </a>
-                            <a href="https://innovation-edges.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
-                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            <a href="https://innovation-edges.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
                     
-                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                    <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/ethere.png" alt="Ethere Art Gallery" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
-                            <i class="fas fa-palette text-5xl text-white/50"></i>
+                            <i class="fas fa-palette text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
 
-                    <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Ethere Art Gallery</h3>
-                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
-                            A digital sanctuary for fine arts. An elegant online art gallery platform designed with immersive aesthetics and seamless interactions to showcase visual masterpieces.
+                    <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Ethere Art Gallery</h3>
+                        <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
+                            A digital sanctuary for fine arts. An elegant online art gallery platform designed with immersive aesthetics and seamless interactions.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Next.js</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">TypeScript</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Framer Motion</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">UI/UX</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Vercel</span>
+                        <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Next.js</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">TypeScript</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Framer Motion</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">UI/UX</span>
                         </div>
-                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
-                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
                                 <i class="fab fa-github"></i> Code
                             </a>
-                            <a href="https://ethere-main.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
-                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            <a href="https://ethere-main.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
                     
-                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                    <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/cyberNeuro.png" alt="Cyber Neuro AI" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
-                            <i class="fas fa-brain text-5xl text-white/50"></i>
+                            <i class="fas fa-brain text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
 
-                    <div class="p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Cyber Neuro AI</h3>
-                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
-                            A cutting-edge platform for an AI company, showcasing neurological AI solutions with a modern, high-tech interface and seamless data integrations.
+                    <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Cyber Neuro AI</h3>
+                        <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
+                            A cutting-edge platform for an AI company, showcasing neurological AI solutions with a modern, high-tech interface.
                         </p>
-                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Next.js</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">OpenAI API</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Python Backend</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Three.js</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">PostgreSQL</span>
-                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind</span>
+                        <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Next.js</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">OpenAI API</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Python</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Three.js</span>
+                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">PostgreSQL</span>
                         </div>
-                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
-                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
                                 <i class="fab fa-github"></i> Code
                             </a>
-                            <a href="https://cyberneuroaicompany.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
-                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            <a href="https://cyberneuroaicompany.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
                             </a>
                         </div>
                     </div>
@@ -502,185 +515,210 @@
         </div>
     </section>
 
-    <footer id="contact" class="relative py-20 border-t border-rose-900/40 z-10 mt-auto overflow-hidden">
+    <footer id="contact" class="relative py-16 md:py-20 border-t border-rose-900/40 z-10 mt-auto overflow-hidden">
         
         <div id="footer-vanta" class="absolute inset-0 z-0 opacity-80"></div>
         <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-0 pointer-events-none"></div>
 
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-[0_0_10px_rgba(159,18,57,0.8)]">Let's Build Together</h2>
-            <p class="text-gray-300 mb-10 max-w-md mx-auto drop-shadow-md font-medium">Currently open for new opportunities and freelance projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+        <div class="container mx-auto px-4 md:px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 text-white drop-shadow-[0_0_10px_rgba(159,18,57,0.8)]">Let's Build Together</h2>
+            <p class="text-sm md:text-base text-gray-300 mb-8 md:mb-10 max-w-md mx-auto drop-shadow-md font-medium px-2">Currently open for new opportunities and freelance projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
             
-            <div class="flex justify-center space-x-6 mb-12">
-                <a href="https://wa.me/+201020955429" target="_blank" class="w-14 h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:border-green-500 hover:bg-green-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(34,197,94,0.5)]">
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-10 md:mb-12">
+                <a href="https://wa.me/+201020955429" target="_blank" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-xl md:text-2xl text-gray-300 hover:text-white hover:border-green-500 hover:bg-green-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(34,197,94,0.5)]">
                     <i class="fab fa-whatsapp"></i>
                 </a>
-                <a href="https://linkedin.com/in/ezz-eldin-ahmed22/" target="_blank" class="w-14 h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:border-blue-500 hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(59,130,246,0.5)]">
+                <a href="https://linkedin.com/in/ezz-eldin-ahmed22/" target="_blank" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-xl md:text-2xl text-gray-300 hover:text-white hover:border-blue-500 hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(59,130,246,0.5)]">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://github.com/ezzeldinx" target="_blank" class="w-14 h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:border-gray-400 hover:bg-gray-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(255,255,255,0.4)]">
+                <a href="https://github.com/ezzeldinx" target="_blank" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-xl md:text-2xl text-gray-300 hover:text-white hover:border-gray-400 hover:bg-gray-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(255,255,255,0.4)]">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="mailto:ezzeldin55x@gmail.com" class="w-14 h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:border-rose-500 hover:bg-rose-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(225,29,72,0.5)]">
+                <a href="mailto:ezzeldin55x@gmail.com" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-xl md:text-2xl text-gray-300 hover:text-white hover:border-rose-500 hover:bg-rose-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(225,29,72,0.5)]">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
             
-            <p class="text-gray-400 text-sm font-bold tracking-widest uppercase drop-shadow-md">© 2026 Ezz Eldin. Crafted with Passion.</p>
+            <p class="text-gray-400 text-xs md:text-sm font-bold tracking-widest uppercase drop-shadow-md">© 2026 Ezz Eldin. Crafted with Passion.</p>
         </div>
     </footer>
 
     <script>
-        // --- 1. LOADER 3D VORTEX LOGIC ---
+        // --- 1. LOADER 3D VORTEX LOGIC (Optimized for Mobile) ---
         const loaderWrapper = document.getElementById('loader-wrapper');
         const loaderText = document.getElementById('loading-text');
 
-        const loaderScene = new THREE.Scene();
-        loaderScene.fog = new THREE.FogExp2(0x000000, 0.0015);
-        const loaderCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
-        loaderCamera.position.z = 800;
-        
-        const loaderRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        loaderRenderer.setPixelRatio(window.devicePixelRatio);
-        loaderRenderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('loader-webgl').appendChild(loaderRenderer.domElement);
-
-        const particleCount = 6000;
-        const geometry = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const colors = new Float32Array(particleCount * 3);
-
-        const color1 = new THREE.Color(0xe11d48); 
-        const color2 = new THREE.Color(0x4c0519); 
-        const color3 = new THREE.Color(0x000000); 
-
-        for (let i = 0; i < particleCount; i++) {
-            const z = (Math.random() - 0.5) * 2000;
-            const radius = Math.sqrt(Math.abs(z)) * 10 + (Math.random() * 50);
-            const theta = Math.random() * Math.PI * 2;
-
-            positions[i * 3] = radius * Math.cos(theta);
-            positions[i * 3 + 1] = radius * Math.sin(theta);
-            positions[i * 3 + 2] = z;
-
-            const mixRatio = Math.random();
-            let finalColor = color1.clone();
-            if (mixRatio > 0.6) finalColor = color2.clone();
-            if (mixRatio > 0.9) finalColor = color3.clone();
-
-            colors[i * 3] = finalColor.r;
-            colors[i * 3 + 1] = finalColor.g;
-            colors[i * 3 + 2] = finalColor.b;
-        }
-
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-        const material = new THREE.PointsMaterial({
-            size: 2.5,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
-        });
-
-        const vortex = new THREE.Points(geometry, material);
-        loaderScene.add(vortex);
-
-        let loaderAnimId;
-        let pullSpeed = 0;
-        let rotationSpeed = 0.002;
-
-        function animateLoader() {
-            loaderAnimId = requestAnimationFrame(animateLoader);
-            
-            vortex.rotation.z += rotationSpeed;
-            loaderCamera.position.z -= pullSpeed;
-
-            const positionsArray = vortex.geometry.attributes.position.array;
-            for(let i=0; i<particleCount; i++) {
-                positionsArray[i*3] *= 0.9999; 
-                positionsArray[i*3+1] *= 0.9999;
-            }
-            vortex.geometry.attributes.position.needsUpdate = true;
-
-            loaderRenderer.render(loaderScene, loaderCamera);
-        }
-        animateLoader();
-
-        setTimeout(() => {
-            loaderText.style.opacity = '0';
-            loaderText.style.transform = 'translate(-50%, -50%) scale(3)';
-            
-            let speedInterval = setInterval(() => {
-                pullSpeed += 0.5;
-                rotationSpeed += 0.0005;
-                if (pullSpeed > 15) clearInterval(speedInterval);
-            }, 50);
-        }, 3000); 
-
-        setTimeout(() => {
+        // Failsafe: Force hide loader after 4 seconds to prevent getting stuck
+        let loaderKilled = false;
+        const forceKillLoader = () => {
+            if (loaderKilled) return;
+            loaderKilled = true;
             loaderWrapper.style.opacity = '0';
             document.body.classList.remove('loading-active');
-
             setTimeout(() => {
                 loaderWrapper.style.display = 'none';
-                cancelAnimationFrame(loaderAnimId);
-                loaderRenderer.dispose();
-            }, 1000); 
-        }, 5000); 
+            }, 800);
+        };
+        setTimeout(forceKillLoader, 4000); // Hard limit 4 seconds
 
+        const isMobile = window.innerWidth < 768;
+        
+        try {
+            const loaderScene = new THREE.Scene();
+            loaderScene.fog = new THREE.FogExp2(0x000000, 0.0015);
+            const loaderCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
+            loaderCamera.position.z = 800;
+            
+            const loaderRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            loaderRenderer.setPixelRatio(window.devicePixelRatio);
+            loaderRenderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('loader-webgl').appendChild(loaderRenderer.domElement);
+
+            // Reduce particles drastically on mobile to prevent crash/freeze
+            const particleCount = isMobile ? 1500 : 5000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            const color1 = new THREE.Color(0xe11d48); 
+            const color2 = new THREE.Color(0x4c0519); 
+            const color3 = new THREE.Color(0x000000); 
+
+            for (let i = 0; i < particleCount; i++) {
+                const z = (Math.random() - 0.5) * 2000;
+                const radius = Math.sqrt(Math.abs(z)) * 10 + (Math.random() * 50);
+                const theta = Math.random() * Math.PI * 2;
+
+                positions[i * 3] = radius * Math.cos(theta);
+                positions[i * 3 + 1] = radius * Math.sin(theta);
+                positions[i * 3 + 2] = z;
+
+                const mixRatio = Math.random();
+                let finalColor = color1.clone();
+                if (mixRatio > 0.6) finalColor = color2.clone();
+                if (mixRatio > 0.9) finalColor = color3.clone();
+
+                colors[i * 3] = finalColor.r;
+                colors[i * 3 + 1] = finalColor.g;
+                colors[i * 3 + 2] = finalColor.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: isMobile ? 3.0 : 2.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+
+            const vortex = new THREE.Points(geometry, material);
+            loaderScene.add(vortex);
+
+            let loaderAnimId;
+            let pullSpeed = 0;
+            let rotationSpeed = 0.002;
+
+            function animateLoader() {
+                if (loaderKilled) {
+                    cancelAnimationFrame(loaderAnimId);
+                    loaderRenderer.dispose();
+                    return;
+                }
+                loaderAnimId = requestAnimationFrame(animateLoader);
+                
+                vortex.rotation.z += rotationSpeed;
+                loaderCamera.position.z -= pullSpeed;
+
+                const positionsArray = vortex.geometry.attributes.position.array;
+                for(let i=0; i<particleCount; i++) {
+                    positionsArray[i*3] *= 0.9999; 
+                    positionsArray[i*3+1] *= 0.9999;
+                }
+                vortex.geometry.attributes.position.needsUpdate = true;
+
+                loaderRenderer.render(loaderScene, loaderCamera);
+            }
+            animateLoader();
+
+            setTimeout(() => {
+                if(loaderKilled) return;
+                loaderText.style.opacity = '0';
+                loaderText.style.transform = 'translate(-50%, -50%) scale(3)';
+                
+                let speedInterval = setInterval(() => {
+                    if(loaderKilled) clearInterval(speedInterval);
+                    pullSpeed += isMobile ? 0.8 : 0.5; // Faster pull on mobile
+                    rotationSpeed += 0.0005;
+                    if (pullSpeed > 20) clearInterval(speedInterval);
+                }, 50);
+            }, 1200); 
+
+            setTimeout(forceKillLoader, 3000); // Normal hide time
+
+        } catch (e) {
+            console.error("WebGL Loader Error", e);
+            forceKillLoader(); // Fallback if Three.js fails completely
+        }
 
         // --- 2. VANTA BACKGROUNDS (Main Site) ---
-        VANTA.NET({
-            el: "#vanta-canvas",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x9f1239,
-            backgroundColor: 0x000000,
-            points: 12.00,
-            maxDistance: 22.00,
-            spacing: 16.00,
-            showDots: true
-        });
+        setTimeout(() => {
+            try {
+                VANTA.NET({
+                    el: "#vanta-canvas",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x9f1239,
+                    backgroundColor: 0x000000,
+                    points: isMobile ? 8.00 : 12.00, // Fewer points on mobile
+                    maxDistance: 22.00,
+                    spacing: 16.00,
+                    showDots: true
+                });
 
-        VANTA.NET({
-            el: "#vanta-work-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0xf43f5e, 
-            backgroundColor: 0x2a0410, 
-            points: 10.00,
-            maxDistance: 20.00,
-            spacing: 18.00,
-            showDots: true
-        });
+                VANTA.NET({
+                    el: "#vanta-work-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0xf43f5e, 
+                    backgroundColor: 0x2a0410, 
+                    points: isMobile ? 6.00 : 10.00,
+                    maxDistance: 20.00,
+                    spacing: 18.00,
+                    showDots: true
+                });
 
-        VANTA.WAVES({
-            el: "#footer-vanta",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x4c0519,
-            shininess: 35.00,
-            waveHeight: 15.00,
-            waveSpeed: 0.70,
-            zoom: 0.85
-        });
+                VANTA.WAVES({
+                    el: "#footer-vanta",
+                    mouseControls: false,
+                    touchControls: false,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x4c0519,
+                    shininess: 35.00,
+                    waveHeight: 15.00,
+                    waveSpeed: 0.70,
+                    zoom: 0.85
+                });
+            } catch(e) {
+                console.error("Vanta initialization error", e);
+            }
+        }, 1000); // Initialize Vanta slightly after loader starts to distribute load
 
         // --- 3. MOBILE MENU LOGIC ---
         const menuBtn = document.getElementById('menu-btn');
@@ -699,14 +737,6 @@
                     mobileMenu.classList.remove('flex');
                 }
             });
-        });
-
-        window.addEventListener('resize', () => {
-            if(loaderWrapper.style.display !== 'none') {
-                loaderCamera.aspect = window.innerWidth / window.innerHeight;
-                loaderCamera.updateProjectionMatrix();
-                loaderRenderer.setSize(window.innerWidth, window.innerHeight);
-            }
         });
     </script>
 </body>
