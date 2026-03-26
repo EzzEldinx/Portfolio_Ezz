@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entering Dimension | Ezz Eldin</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        body { margin: 0; padding: 0; background-color: #000000; overflow: hidden; font-family: sans-serif; }
+        
+        #webgl-container { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; }
+        
+        /* The Central Text that fades out as we zoom in */
+        .center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
+            transition: opacity 1.5s ease-in-out, transform 2s ease-in-out;
+        }
+
+        /* Overlay for the final smooth fade to the main site */
+        #fade-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: #000000;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .tracking-in-expand {
+            animation: tracking-in-expand 2s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+        }
+
+        @keyframes tracking-in-expand {
+            0% { letter-spacing: -0.5em; opacity: 0; }
+            40% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="webgl-container"></div>
+
+    <div id="loading-text" class="center-text">
+        <h1 class="text-white text-2xl md:text-4xl font-extrabold tracking-widest uppercase mb-2 tracking-in-expand">
+            EZZ <span class="text-rose-600">.</span>
+        </h1>
+        <p class="text-rose-500/70 text-xs md:text-sm tracking-[0.3em] uppercase animate-pulse">
+            Initiating Sequence
+        </p>
+    </div>
+
+    <div id="fade-overlay"></div>
+
+    <script>
+        // --- 1. SETUP THREE.JS SCENE ---
+        const container = document.getElementById('webgl-container');
+        const scene = new THREE.Scene();
+        
+        // Add some fog to blend the vortex into the darkness
+        scene.fog = new THREE.FogExp2(0x000000, 0.0015);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
+        camera.position.z = 800; // Start outside the vortex
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        // --- 2. CREATE THE VORTEX / TORNADO (Particles) ---
+        const particleCount = 6000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+
+        const color1 = new THREE.Color(0xe11d48); // Rose
+        const color2 = new THREE.Color(0x4c0519); // Dark Burgundy
+        const color3 = new THREE.Color(0x000000); // Black
+
+        for (let i = 0; i < particleCount; i++) {
+            // Distribute particles along the Z axis (depth)
+            const z = (Math.random() - 0.5) * 2000;
+            
+            // Calculate radius to form a funnel/tornado shape
+            // Closer to 0 on Z = tighter radius, further away = wider radius
+            const radius = Math.sqrt(Math.abs(z)) * 10 + (Math.random() * 50);
+            
+            // Random angle for circular placement
+            const theta = Math.random() * Math.PI * 2;
+
+            const x = radius * Math.cos(theta);
+            const y = radius * Math.sin(theta);
+
+            positions[i * 3] = x;
+            positions[i * 3 + 1] = y;
+            positions[i * 3 + 2] = z;
+
+            // Mix colors based on position
+            const mixRatio = Math.random();
+            let finalColor = color1.clone();
+            if (mixRatio > 0.6) finalColor = color2.clone();
+            if (mixRatio > 0.9) finalColor = color3.clone();
+
+            colors[i * 3] = finalColor.r;
+            colors[i * 3 + 1] = finalColor.g;
+            colors[i * 3 + 2] = finalColor.b;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        // Create the particle material with glowing effect
+        const material = new THREE.PointsMaterial({
+            size: 2.5,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const vortex = new THREE.Points(geometry, material);
+        scene.add(vortex);
+
+        // --- 3. ANIMATION LOGIC ---
+        let animationFrameId;
+        let clock = new THREE.Clock();
+        
+        // Speed controls for the cinematic pull
+        let pullSpeed = 0;
+        let rotationSpeed = 0.002;
+
+        function animate() {
+            animationFrameId = requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+
+            // Rotate the vortex continuously
+            vortex.rotation.z += rotationSpeed;
+
+            // Move the camera inside the vortex (The Pull-in Effect)
+            camera.position.z -= pullSpeed;
+
+            // Make the particles subtly drift towards the center (The suction effect)
+            const positionsArray = vortex.geometry.attributes.position.array;
+            for(let i=0; i<particleCount; i++) {
+                // slowly decrease X and Y to pull towards center
+                positionsArray[i*3] *= 0.9999; 
+                positionsArray[i*3+1] *= 0.9999;
+            }
+            vortex.geometry.attributes.position.needsUpdate = true;
+
+            renderer.render(scene, camera);
+        }
+
+        // Start animation loop
+        animate();
+
+        // --- 4. TIMELINE AND TRANSITION ---
+        
+        // Step 1: After 1.5s, accelerate the pull and fade out text
+        setTimeout(() => {
+            const textElement = document.getElementById('loading-text');
+            textElement.style.opacity = '0';
+            textElement.style.transform = 'translate(-50%, -50%) scale(3)'; // Zoom text out
+            
+            // Accelerate camera speed & rotation
+            let speedInterval = setInterval(() => {
+                pullSpeed += 0.5;
+                rotationSpeed += 0.0005;
+                if (pullSpeed > 15) clearInterval(speedInterval);
+            }, 50);
+        }, 1500);
+
+        // Step 2: After 3.5s, fade the whole screen to black
+        setTimeout(() => {
+            document.getElementById('fade-overlay').style.opacity = '1';
+        }, 3500);
+
+        // Step 3: After 4.5s (when screen is fully black), redirect to the main portfolio
+        setTimeout(() => {
+            // CHANGED THIS TO POINT TO YOUR MAIN FILE
+            window.location.href = 'index.html'; 
+        }, 4500);
+
+        // --- Handle Window Resize ---
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

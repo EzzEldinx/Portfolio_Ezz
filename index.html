@@ -5,26 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ezz Eldin | Software Engineer Portfolio</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
     
     <style>
+        /* Custom Fonts */
+        .font-tech { font-family: 'Space Grotesk', sans-serif; }
+        .font-logo { font-family: 'Syncopate', sans-serif; } /* New premium cinematic font */
+
+        /* Stop scrolling while loading */
+        body.loading-active { overflow: hidden !important; }
+        
         body { margin: 0; padding: 0; background-color: #000000; color: #f3f4f6; overflow-x: hidden; }
         
-        /* Fixed Background for Global 3D Effect */
+        /* --- LOADER STYLES --- */
+        #loader-wrapper {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 99999;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #loader-webgl {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1;
+        }
+
+        .loader-center-text {
+            position: absolute;
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
+            transition: opacity 1.5s ease-in-out, transform 2s ease-in-out;
+        }
+
+        /* The Breathing Effect for the Logo */
+        .breathing-text {
+            display: inline-block;
+            animation: breathing 3s ease-in-out infinite;
+        }
+
+        @keyframes breathing {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 15px rgba(225,29,72,0.4); }
+            50% { transform: scale(1.08); text-shadow: 0 0 30px rgba(225,29,72,1), 0 0 15px rgba(225,29,72,0.6); }
+        }
+
+        /* --- NEW: Glowing Animated Gradient Text --- */
+        .animated-gradient-text {
+            background: linear-gradient(to right, #fda4af, #e11d48, #9f1239, #e11d48, #fda4af);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradientMove 3s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(225,29,72,0.6)); /* The Glow */
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* --- MAIN SITE STYLES --- */
         #vanta-canvas { position: fixed; z-index: -2; top: 0; left: 0; width: 100vw; height: 100vh; }
         
-        /* Custom scrollbar - Burgundy theme */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #881337; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #9f1239; }
 
-        /* Scrolling Image Effect inside Cards */
         .scrolling-image {
             width: 100%;
             height: auto;
@@ -36,7 +100,6 @@
             transform: translateY(calc(-100% + 14rem));
         }
 
-        /* Typing Effect for Hero Text */
         .typing-effect {
             overflow: hidden;
             border-right: 2px solid #e11d48;
@@ -55,49 +118,32 @@
             50% { border-color: #e11d48; }
         }
 
-        /* Seamless Marquee Animation */
-        .animate-marquee {
-            animation: marquee 25s linear infinite;
-        }
+        .animate-marquee { animation: marquee 25s linear infinite; }
         @keyframes marquee {
             0% { transform: translateX(0%); }
             100% { transform: translateX(-100%); }
         }
-
-        /* Live Footer Gradient Background */
-        .footer-live-bg {
-            background: linear-gradient(-45deg, #000000, #3e0413, #000000, #5a061d);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating Particles for Footer */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: #e11d48;
-            filter: blur(3px);
-            animation: floatParticle 6s ease-in-out infinite alternate;
-        }
-        @keyframes floatParticle {
-            0% { transform: translateY(0) scale(1); opacity: 0.2; }
-            100% { transform: translateY(-20px) scale(1.5); opacity: 0.6; }
-        }
     </style>
 </head>
-<body class="font-sans antialiased flex flex-col min-h-screen relative selection:bg-rose-900 selection:text-white">
+<body class="font-sans antialiased flex flex-col min-h-screen relative selection:bg-rose-900 selection:text-white loading-active">
 
+    <div id="loader-wrapper">
+        <div id="loader-webgl"></div>
+        <div id="loading-text" class="loader-center-text">
+            <h1 class="breathing-text text-white text-5xl md:text-7xl font-extrabold tracking-tighter mb-4">
+                E z z   E l d i n <span class="text-rose-600">.</span>
+            </h1>
+            <p class="text-rose-500/70 font-tech text-xs md:text-sm tracking-[0.4em] uppercase animate-pulse mt-2">
+                Engineering for dominance
+            </p>
+        </div>
+    </div>
     <div id="vanta-canvas"></div>
 
     <header class="fixed w-full top-6 z-50 flex justify-center px-4">
         <div class="w-full max-w-5xl bg-black/70 backdrop-blur-lg border border-rose-900/50 rounded-full px-8 py-3 flex flex-wrap justify-between items-center shadow-[0_10px_30px_rgba(159,18,57,0.2)] relative">
-            <div class="text-xl font-extrabold tracking-wider text-white flex items-center gap-2 cursor-pointer z-50">
-                <span class="text-rose-600 drop-shadow-[0_0_8px_rgba(159,18,57,0.8)]"><i class="fas fa-code"></i></span> EZZ.
+            <div class="font-logo text-xl tracking-widest text-white flex items-center gap-2 cursor-pointer z-50">
+                <span class="text-rose-600 drop-shadow-[0_0_8px_rgba(159,18,57,0.8)]"><i class="fas fa-code text-sm"></i></span> EZZ.
             </div>
 
             <button id="menu-btn" class="md:hidden text-gray-300 hover:text-rose-400 text-xl z-50 focus:outline-none">
@@ -126,12 +172,12 @@
         
         <div class="inline-block max-w-full overflow-hidden mb-4">
             <h1 class="typing-effect text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter">
-                I'm <span class="text-rose-600">Ezz Eldin</span>
+                I'm <span class="font-tech text-rose-600">Ezz Eldin</span>
             </h1>
         </div>
 
         <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-10 tracking-tighter drop-shadow-lg leading-tight text-white max-w-4xl">
-            Architecting <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-rose-700">Scalable</span> Digital Ecosystems.
+            Architecting <span class="animated-gradient-text">Scalable</span> Digital Ecosystems.
         </h2>
         
         <p class="text-base md:text-lg text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
@@ -168,7 +214,7 @@
     <section id="skills" class="py-24 relative z-10 bg-black/40 backdrop-blur-md">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl font-extrabold mb-4 text-white tracking-tight">
-                Tech <span class="text-rose-600">Stack</span>
+                Tech <span class="animated-gradient-text">Stack</span>
             </h2>
             <p class="text-gray-400 mb-14 max-w-2xl mx-auto">Technologies and tools I use to bring ideas to life.</p>
             
@@ -240,7 +286,7 @@
         
         <div class="container mx-auto px-6 relative z-10">
             <h2 class="text-4xl font-extrabold text-center mb-4 text-white tracking-tight">
-                Selected <span class="text-rose-600">Works</span>
+                Selected <span class="animated-gradient-text">Works</span>
             </h2>
             <p class="text-gray-300 text-center mb-16 max-w-2xl mx-auto drop-shadow-md">A showcase of scalable applications, seamless e-commerce, and modern interfaces.</p>
             
@@ -456,12 +502,10 @@
         </div>
     </section>
 
-    <footer id="contact" class="footer-live-bg relative py-20 border-t border-rose-900/40 z-10 mt-auto overflow-hidden">
+    <footer id="contact" class="relative py-20 border-t border-rose-900/40 z-10 mt-auto overflow-hidden">
         
-        <div class="particle w-4 h-4 top-10 left-[10%] opacity-30"></div>
-        <div class="particle w-2 h-2 top-32 right-[20%] opacity-20" style="animation-delay: 1s;"></div>
-        <div class="particle w-3 h-3 bottom-10 left-[40%] opacity-40" style="animation-delay: 2s;"></div>
-        <div class="particle w-5 h-5 top-20 right-[10%] opacity-20" style="animation-delay: 0.5s;"></div>
+        <div id="footer-vanta" class="absolute inset-0 z-0 opacity-80"></div>
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-0 pointer-events-none"></div>
 
         <div class="container mx-auto px-6 text-center relative z-10">
             <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-[0_0_10px_rgba(159,18,57,0.8)]">Let's Build Together</h2>
@@ -487,7 +531,107 @@
     </footer>
 
     <script>
-        // Global Background (Deep Burgundy Lines)
+        // --- 1. LOADER 3D VORTEX LOGIC ---
+        const loaderWrapper = document.getElementById('loader-wrapper');
+        const loaderText = document.getElementById('loading-text');
+
+        const loaderScene = new THREE.Scene();
+        loaderScene.fog = new THREE.FogExp2(0x000000, 0.0015);
+        const loaderCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
+        loaderCamera.position.z = 800;
+        
+        const loaderRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        loaderRenderer.setPixelRatio(window.devicePixelRatio);
+        loaderRenderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('loader-webgl').appendChild(loaderRenderer.domElement);
+
+        const particleCount = 6000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+
+        const color1 = new THREE.Color(0xe11d48); 
+        const color2 = new THREE.Color(0x4c0519); 
+        const color3 = new THREE.Color(0x000000); 
+
+        for (let i = 0; i < particleCount; i++) {
+            const z = (Math.random() - 0.5) * 2000;
+            const radius = Math.sqrt(Math.abs(z)) * 10 + (Math.random() * 50);
+            const theta = Math.random() * Math.PI * 2;
+
+            positions[i * 3] = radius * Math.cos(theta);
+            positions[i * 3 + 1] = radius * Math.sin(theta);
+            positions[i * 3 + 2] = z;
+
+            const mixRatio = Math.random();
+            let finalColor = color1.clone();
+            if (mixRatio > 0.6) finalColor = color2.clone();
+            if (mixRatio > 0.9) finalColor = color3.clone();
+
+            colors[i * 3] = finalColor.r;
+            colors[i * 3 + 1] = finalColor.g;
+            colors[i * 3 + 2] = finalColor.b;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 2.5,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const vortex = new THREE.Points(geometry, material);
+        loaderScene.add(vortex);
+
+        let loaderAnimId;
+        let pullSpeed = 0;
+        let rotationSpeed = 0.002;
+
+        function animateLoader() {
+            loaderAnimId = requestAnimationFrame(animateLoader);
+            
+            vortex.rotation.z += rotationSpeed;
+            loaderCamera.position.z -= pullSpeed;
+
+            const positionsArray = vortex.geometry.attributes.position.array;
+            for(let i=0; i<particleCount; i++) {
+                positionsArray[i*3] *= 0.9999; 
+                positionsArray[i*3+1] *= 0.9999;
+            }
+            vortex.geometry.attributes.position.needsUpdate = true;
+
+            loaderRenderer.render(loaderScene, loaderCamera);
+        }
+        animateLoader();
+
+        setTimeout(() => {
+            loaderText.style.opacity = '0';
+            loaderText.style.transform = 'translate(-50%, -50%) scale(3)';
+            
+            let speedInterval = setInterval(() => {
+                pullSpeed += 0.5;
+                rotationSpeed += 0.0005;
+                if (pullSpeed > 15) clearInterval(speedInterval);
+            }, 50);
+        }, 3000); 
+
+        setTimeout(() => {
+            loaderWrapper.style.opacity = '0';
+            document.body.classList.remove('loading-active');
+
+            setTimeout(() => {
+                loaderWrapper.style.display = 'none';
+                cancelAnimationFrame(loaderAnimId);
+                loaderRenderer.dispose();
+            }, 1000); 
+        }, 5000); 
+
+
+        // --- 2. VANTA BACKGROUNDS (Main Site) ---
         VANTA.NET({
             el: "#vanta-canvas",
             mouseControls: true,
@@ -505,7 +649,6 @@
             showDots: true
         });
 
-        // Specific Background for the Work Section (Vibrant Rose/Plum)
         VANTA.NET({
             el: "#vanta-work-bg",
             mouseControls: true,
@@ -523,7 +666,23 @@
             showDots: true
         });
 
-        // Mobile Menu Toggle Logic
+        VANTA.WAVES({
+            el: "#footer-vanta",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x4c0519,
+            shininess: 35.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.70,
+            zoom: 0.85
+        });
+
+        // --- 3. MOBILE MENU LOGIC ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -533,14 +692,21 @@
             mobileMenu.classList.toggle('flex');
         });
 
-        // Close menu when a link is clicked
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                if(window.innerWidth < 768) { // Only on mobile
+                if(window.innerWidth < 768) {
                     mobileMenu.classList.add('hidden');
                     mobileMenu.classList.remove('flex');
                 }
             });
+        });
+
+        window.addEventListener('resize', () => {
+            if(loaderWrapper.style.display !== 'none') {
+                loaderCamera.aspect = window.innerWidth / window.innerHeight;
+                loaderCamera.updateProjectionMatrix();
+                loaderRenderer.setSize(window.innerWidth, window.innerHeight);
+            }
         });
     </script>
 </body>
