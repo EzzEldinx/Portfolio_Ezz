@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezz Eldin | Software Engineer Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    
+    <style>
+        body { margin: 0; padding: 0; background-color: #000000; color: #f3f4f6; overflow-x: hidden; }
+        
+        /* Fixed Background for Global 3D Effect */
+        #vanta-canvas { position: fixed; z-index: -2; top: 0; left: 0; width: 100vw; height: 100vh; }
+        
+        /* Custom scrollbar - Burgundy theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #881337; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9f1239; }
+
+        /* Scrolling Image Effect inside Cards */
+        .scrolling-image {
+            width: 100%;
+            height: auto;
+            transition: transform 4s ease-in-out;
+            transform: translateY(0);
+        }
+        
+        .group:hover .scrolling-image {
+            transform: translateY(calc(-100% + 14rem));
+        }
+
+        /* Typing Effect for Hero Text */
+        .typing-effect {
+            overflow: hidden;
+            border-right: 2px solid #e11d48;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #e11d48; }
+        }
+
+        /* Seamless Marquee Animation */
+        .animate-marquee {
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Live Footer Gradient Background */
+        .footer-live-bg {
+            background: linear-gradient(-45deg, #000000, #3e0413, #000000, #5a061d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles for Footer */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: #e11d48;
+            filter: blur(3px);
+            animation: floatParticle 6s ease-in-out infinite alternate;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(0) scale(1); opacity: 0.2; }
+            100% { transform: translateY(-20px) scale(1.5); opacity: 0.6; }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased flex flex-col min-h-screen relative selection:bg-rose-900 selection:text-white">
+
+    <div id="vanta-canvas"></div>
+
+    <header class="fixed w-full top-6 z-50 flex justify-center px-4">
+        <div class="w-full max-w-5xl bg-black/70 backdrop-blur-lg border border-rose-900/50 rounded-full px-8 py-3 flex flex-wrap justify-between items-center shadow-[0_10px_30px_rgba(159,18,57,0.2)] relative">
+            <div class="text-xl font-extrabold tracking-wider text-white flex items-center gap-2 cursor-pointer z-50">
+                <span class="text-rose-600 drop-shadow-[0_0_8px_rgba(159,18,57,0.8)]"><i class="fas fa-code"></i></span> EZZ.
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-rose-400 text-xl z-50 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav id="mobile-menu" class="hidden md:flex absolute md:static top-full left-0 w-full md:w-auto bg-black/95 md:bg-transparent border border-rose-900/50 md:border-none rounded-2xl md:rounded-none mt-4 md:mt-0 p-6 md:p-0 flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 items-center z-40 transition-all shadow-xl md:shadow-none">
+                <a href="#hero" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-semibold text-sm tracking-widest uppercase">Home</a>
+                <a href="#skills" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-semibold text-sm tracking-widest uppercase">Skills</a>
+                <a href="#work" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-semibold text-sm tracking-widest uppercase">Work</a>
+                <a href="#contact" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-semibold text-sm tracking-widest uppercase">Contact</a>
+                <a href="#contact" class="mobile-link md:hidden px-8 py-3 rounded-full bg-rose-700 hover:bg-rose-600 text-white text-sm font-bold transition-all mt-4 inline-block w-full text-center shadow-[0_0_15px_rgba(159,18,57,0.5)]">Hire Me</a>
+            </nav>
+
+            <a href="#contact" class="hidden md:block px-5 py-2 rounded-full bg-rose-700 hover:bg-rose-600 text-white text-sm font-bold transition-all duration-300 shadow-[0_0_15px_rgba(159,18,57,0.5)] z-50">
+                Hire Me
+            </a>
+        </div>
+    </header>
+
+    <main id="hero" class="container mx-auto px-6 pt-48 pb-16 min-h-screen flex flex-col items-center justify-center relative z-10 text-center">
+        
+        <div class="inline-block px-5 py-1.5 rounded-full bg-rose-950/70 border border-rose-800/50 text-rose-300 text-xs font-bold mb-8 backdrop-blur-sm uppercase tracking-widest shadow-[0_0_15px_rgba(159,18,57,0.3)]">
+            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span> Available for new projects
+        </div>
+        
+        <div class="inline-block max-w-full overflow-hidden mb-4">
+            <h1 class="typing-effect text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tighter">
+                I'm <span class="text-rose-600">Ezz Eldin</span>
+            </h1>
+        </div>
+
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-10 tracking-tighter drop-shadow-lg leading-tight text-white max-w-4xl">
+            Architecting <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-rose-700">Scalable</span> Digital Ecosystems.
+        </h2>
+        
+        <p class="text-base md:text-lg text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+            As a dedicated Full-Stack Software Engineer based in Alexandria, Egypt, I bridge the gap between design and complex backend logic. With a profound passion for clean code and performance optimization, I engineer highly interactive, robust, and scalable web applications that drive real business value and deliver seamless user journeys.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-5 justify-center w-full sm:w-auto">
+            <a href="#work" class="px-8 py-4 rounded-full bg-rose-700 hover:bg-rose-600 text-white font-bold transition-all duration-300 shadow-[0_0_20px_rgba(159,18,57,0.4)] hover:shadow-[0_0_30px_rgba(159,18,57,0.6)] hover:-translate-y-1 w-full sm:w-auto text-center">
+                Explore My Work <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+            <a href="#contact" class="px-8 py-4 rounded-full bg-black/60 hover:bg-rose-950/50 border border-rose-800 text-rose-300 font-bold transition-all duration-300 backdrop-blur-sm hover:-translate-y-1 w-full sm:w-auto text-center">
+                Get In Touch
+            </a>
+        </div>
+    </main>
+
+    <div class="flex overflow-hidden bg-rose-950/40 backdrop-blur-sm border-y border-rose-900/50 py-4 z-10 whitespace-nowrap shadow-[0_0_20px_rgba(159,18,57,0.1)]">
+        <div class="animate-marquee inline-block">
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🚀 High-Performance Web Apps</span>
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">✨ Pixel-Perfect UI/UX</span>
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">⚡ Scalable Architecture</span>
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🛠️ Clean Code</span>
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🔥 Full-Stack Mastery</span>
+        </div>
+        <div class="animate-marquee inline-block">
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🚀 High-Performance Web Apps</span>
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">✨ Pixel-Perfect UI/UX</span>
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">⚡ Scalable Architecture</span>
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🛠️ Clean Code</span>
+            <span class="mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-sm md:text-base">🔥 Full-Stack Mastery</span>
+        </div>
+    </div>
+
+    <section id="skills" class="py-24 relative z-10 bg-black/40 backdrop-blur-md">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-extrabold mb-4 text-white tracking-tight">
+                Tech <span class="text-rose-600">Stack</span>
+            </h2>
+            <p class="text-gray-400 mb-14 max-w-2xl mx-auto">Technologies and tools I use to bring ideas to life.</p>
+            
+            <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                    <i class="fab fa-react text-blue-400 text-lg"></i> React.js
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                    <i class="fab fa-neos text-white text-lg"></i> Next.js
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-400 hover:shadow-[0_0_15px_rgba(74,222,128,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                    <i class="fab fa-vuejs text-green-500 text-lg"></i> Vue.js
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                    <i class="text-blue-500 font-bold text-lg">TS</i> TypeScript
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-yellow-400 hover:shadow-[0_0_15px_rgba(250,204,21,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                    <i class="fab fa-js text-yellow-400 text-lg"></i> JavaScript
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                    <i class="fab fa-css3-alt text-cyan-400 text-lg"></i> Tailwind CSS
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all duration-300 cursor-default flex items-center gap-3">
+                    <i class="fas fa-code-branch text-purple-500 text-lg"></i> Redux / Zustand
+                </div>
+
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fab fa-node-js text-green-500 text-lg"></i> Node.js
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-gray-300 hover:shadow-[0_0_15px_rgba(209,213,219,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fas fa-server text-gray-300 text-lg"></i> Express.js
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fab fa-python text-yellow-500 text-lg"></i> Python / Django
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-600 hover:shadow-[0_0_15px_rgba(22,163,74,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fas fa-leaf text-green-600 text-lg"></i> MongoDB
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fas fa-database text-blue-400 text-lg"></i> PostgreSQL
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-indigo-400 hover:shadow-[0_0_15px_rgba(129,140,248,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fas fa-layer-group text-indigo-400 text-lg"></i> Prisma ORM
+                </div>
+
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fab fa-git-alt text-orange-500 text-lg"></i> Git & GitHub
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-600 hover:shadow-[0_0_15px_rgba(37,99,235,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fab fa-docker text-blue-600 text-lg"></i> Docker
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-orange-400 hover:shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fab fa-aws text-orange-400 text-lg"></i> AWS
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-pink-500 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fas fa-exchange-alt text-pink-500 text-lg"></i> REST & GraphQL
+                </div>
+                <div class="px-5 py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-rose-500 hover:shadow-[0_0_15px_rgba(225,29,72,0.3)] transition-all duration-300 cursor-default flex items-center gap-3 mt-2">
+                    <i class="fab fa-figma text-rose-500 text-lg"></i> Figma
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-24 relative z-10 border-y border-rose-900/40 overflow-hidden">
+        
+        <div id="vanta-work-bg" class="absolute inset-0 z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-0 pointer-events-none"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-4xl font-extrabold text-center mb-4 text-white tracking-tight">
+                Selected <span class="text-rose-600">Works</span>
+            </h2>
+            <p class="text-gray-300 text-center mb-16 max-w-2xl mx-auto drop-shadow-md">A showcase of scalable applications, seamless e-commerce, and modern interfaces.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    
+                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                        <img src="src/carta.png" alt="Carta Map" class="scrolling-image">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                            <i class="fas fa-map-marked-alt text-5xl text-white/50"></i>
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Carta</h3>
+                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                            An interactive mapping interface for CEAlex, designed to handle complex spatial data visualization, geographical exploration, and dynamic rendering.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Node.js</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Linux</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Docker</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">React.js</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Leaflet/Mapbox</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Data Viz</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">REST API</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://maps.cealex.org/carte" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    
+                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                        <img src="src/badz.png" alt="Badz Store" class="scrolling-image">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                            <i class="fas fa-shopping-bag text-5xl text-white/50"></i>
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Badz Store</h3>
+                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                            A seamless e-commerce experience designed for high conversion rates. Features a sleek product gallery, cart state management, and secure checkout.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Next.js</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">TypeScript</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Redux/Context</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Payment Gateway</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Node.js</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://badz-store.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    
+                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                        <img src="src/alpha.png" alt="Alpha Call Centers" class="scrolling-image">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                            <i class="fas fa-headset text-5xl text-white/50"></i>
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Alpha Call Centers</h3>
+                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                            Corporate website providing professional BPO and call center services, highly optimized for lead generation, SEO, and client onboarding.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Vue.js / Nuxt</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Node.js</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Linux</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Headless CMS</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">SEO Optimized</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://alphacallcenters.com/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    
+                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                        <img src="src/innovation.png" alt="Innovation Lab" class="scrolling-image">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                            <i class="fas fa-lightbulb text-5xl text-white/50"></i>
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Innovation Lab</h3>
+                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                            A creative digital space showcasing innovative edges and modern web solutions with highly engaging animations and interactive UI/UX.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Next.js 14</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">TypeScript</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">GSAP / Animations</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Vercel Deploy</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Figma Design</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://innovation-edges.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    
+                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                        <img src="src/ethere.png" alt="Ethere Art Gallery" class="scrolling-image">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                            <i class="fas fa-palette text-5xl text-white/50"></i>
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Ethere Art Gallery</h3>
+                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                            A digital sanctuary for fine arts. An elegant online art gallery platform designed with immersive aesthetics and seamless interactions to showcase visual masterpieces.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Next.js</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">TypeScript</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind CSS</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Framer Motion</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">UI/UX</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Vercel</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://ethere-main.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-neutral-900/70 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_20px_40px_rgba(225,29,72,0.4)] relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    
+                    <div class="h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                        <img src="src/cyberNeuro.png" alt="Cyber Neuro AI" class="scrolling-image">
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                            <i class="fas fa-brain text-5xl text-white/50"></i>
+                        </div>
+                    </div>
+
+                    <div class="p-8 flex flex-col flex-grow relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition-colors">Cyber Neuro AI</h3>
+                        <p class="text-gray-300 text-sm mb-6 line-clamp-3 leading-relaxed">
+                            A cutting-edge platform for an AI company, showcasing neurological AI solutions with a modern, high-tech interface and seamless data integrations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-8 mt-auto">
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Next.js</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">OpenAI API</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Python Backend</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Three.js</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">PostgreSQL</span>
+                            <span class="text-[10px] font-bold bg-black/60 text-gray-200 px-3 py-1 rounded-sm border border-neutral-700">Tailwind</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-neutral-800 pt-5">
+                            <a href="#" class="text-gray-300 hover:text-white transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="https://cyberneuroaicompany.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                Live Demo <i class="fas fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer-live-bg relative py-20 border-t border-rose-900/40 z-10 mt-auto overflow-hidden">
+        
+        <div class="particle w-4 h-4 top-10 left-[10%] opacity-30"></div>
+        <div class="particle w-2 h-2 top-32 right-[20%] opacity-20" style="animation-delay: 1s;"></div>
+        <div class="particle w-3 h-3 bottom-10 left-[40%] opacity-40" style="animation-delay: 2s;"></div>
+        <div class="particle w-5 h-5 top-20 right-[10%] opacity-20" style="animation-delay: 0.5s;"></div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-[0_0_10px_rgba(159,18,57,0.8)]">Let's Build Together</h2>
+            <p class="text-gray-300 mb-10 max-w-md mx-auto drop-shadow-md font-medium">Currently open for new opportunities and freelance projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+            
+            <div class="flex justify-center space-x-6 mb-12">
+                <a href="https://wa.me/+201020955429" target="_blank" class="w-14 h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:border-green-500 hover:bg-green-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(34,197,94,0.5)]">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://linkedin.com/in/ezz-eldin-ahmed22/" target="_blank" class="w-14 h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:border-blue-500 hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(59,130,246,0.5)]">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/ezzeldinx" target="_blank" class="w-14 h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:border-gray-400 hover:bg-gray-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(255,255,255,0.4)]">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:ezzeldin55x@gmail.com" class="w-14 h-14 rounded-full border border-neutral-700 bg-neutral-900/80 flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:border-rose-500 hover:bg-rose-600 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(225,29,72,0.5)]">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            
+            <p class="text-gray-400 text-sm font-bold tracking-widest uppercase drop-shadow-md">© 2026 Ezz Eldin. Crafted with Passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global Background (Deep Burgundy Lines)
+        VANTA.NET({
+            el: "#vanta-canvas",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x9f1239,
+            backgroundColor: 0x000000,
+            points: 12.00,
+            maxDistance: 22.00,
+            spacing: 16.00,
+            showDots: true
+        });
+
+        // Specific Background for the Work Section (Vibrant Rose/Plum)
+        VANTA.NET({
+            el: "#vanta-work-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xf43f5e, 
+            backgroundColor: 0x2a0410, 
+            points: 10.00,
+            maxDistance: 20.00,
+            spacing: 18.00,
+            showDots: true
+        });
+
+        // Mobile Menu Toggle Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth < 768) { // Only on mobile
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
