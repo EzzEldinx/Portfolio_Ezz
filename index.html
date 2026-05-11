@@ -3,11 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ezz Eldin | Software Engineer Portfolio</title>
+    <title>E.E Technologies | Software Engineer Portfolio</title>
+    <meta name="title" content="E.E Technologies | Software Engineer Portfolio">
+    <meta name="description" content="Ezz Eldin Ahmed - Software Engineer & Systems Architect specializing in Full-Stack development, DevOps, and scalable web infrastructures. Based in Alexandria, Egypt.">
+    <meta name="keywords" content="Ezz Eldin Ahmed, Software Engineer, Full-Stack Developer, DevOps, Frontend, Backend, React, Node.js, Alexandria, Egypt, E.E Technologies, Web Development">
+    <meta name="author" content="Ezz Eldin Ahmed">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ezzeldin.tech/"> <meta property="og:title" content="E.E Technologies | Ezz Eldin Ahmed">
+    <meta property="og:description" content="Architecting scalable digital ecosystems and delivering flawless performance.">
+    <meta property="og:image" content="src/preview.jpg"> <meta name="theme-color" content="#e11d48">
+    <link rel="icon" type="image/png" href="src/LOGO EE.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@500;700;800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -18,86 +31,97 @@
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
     
     <style>
-
-        /* RGB Breathing Gradient for Footer Title */
-        .rgb-breathing-text {
-            background: linear-gradient(to right, #3b82f6, #a855f7, #ec4899, #f43f5e, #3b82f6);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: gradientMove 4s linear infinite, breathing 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 15px rgba(236,72,153,0.6));
-        }
-        /* Custom Font */
+        /* Custom Fonts */
         .font-tech { font-family: 'Space Grotesk', sans-serif; }
+        .font-logo { font-family: 'Syncopate', sans-serif; }
+        .font-editorial { font-family: 'Playfair Display', serif; }
 
         /* Stop scrolling while loading */
         body.loading-active { overflow: hidden !important; }
         
-        body { margin: 0; padding: 0; background-color: #000000; color: #f3f4f6; overflow-x: hidden; }
-        
-        /* --- LOADER STYLES --- */
-        #loader-wrapper {
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #050505; 
+            color: #f3f4f6; 
+            overflow-x: hidden; 
+            position: relative; 
+        }        
+        /* --- PURE CSS AURORA BACKGROUND --- */
+        /* --- PURE CSS AURORA BACKGROUND --- */
+        /* --- PURE CSS AURORA BACKGROUND --- */
+        .aurora-bg {
             position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #000000;
-            z-index: 99999;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3;
+            background-color: #140118; 
+            overflow: hidden;
+            pointer-events: none; /* السطر ده بيمنع الأورورا إنها تعمل مساحة فاضية تحت الفوتر */
+        }
+        .aurora-blob {
+            position: absolute;
+            filter: blur(120px);
+            border-radius: 50%;
+            animation: aurora-float infinite alternate ease-in-out;
+            opacity: 0.6;
+            mix-blend-mode: screen;
+            will-change: transform, filter;
+            transform: translateZ(0); 
+        }
+        .aurora-1 { width: 60vw; height: 60vw; background: rgb(73, 4, 14); top: -20%; left: -10%; animation-duration: 25s; }
+
+        /* Dark Blue صريح وعميق */
+
+        .aurora-2 { width: 50vw; height: 50vw; background: rgba(1, 7, 26, 0.349); bottom: -20%; right: -10%; animation-duration: 20s; animation-direction: alternate-reverse; }
+
+        /* دمج خفيف للألوان */
+
+        .aurora-3 { width: 55vw; height: 55vw; background: rgba(77, 12, 30, 0.856); top: 30%; left: 20%; animation-duration: 30s; }
+
+        @keyframes aurora-float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(5%, 5%) scale(1.1); }
+            66% { transform: translate(-5%, 10%) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* --- MOBILE PERFORMANCE OPTIMIZATION --- */
+       /* --- MOBILE PERFORMANCE OPTIMIZATION --- */
+       @media (max-width: 768px) {
+            .aurora-blob {
+                filter: blur(80px); /* غباشة وسط تدي شكل حلو وتوفر أداء */
+                mix-blend-mode: screen; /* رجعناها عشان تنور مع الشبكة */
+                opacity: 0.6; /* رجعنا قوة اللون */
+                animation: mobile-pulse 8s infinite alternate ease-in-out; /* حركة نبض خفيفة جداً */
+            }
+        }
+        @keyframes mobile-pulse {
+            0% { transform: scale(1) translateZ(0); }
+            100% { transform: scale(1.15) translateZ(0); }
+        }
+
+        /* --- NEW FAST LOADER STYLES --- */
+        #loader-wrapper {
+            position: fixed; inset: 0; background-color: #000000; z-index: 99999;
+            display: flex; align-items: center; justify-content: center;
             transition: opacity 0.8s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
-        #loader-webgl {
-            position: absolute;
-            top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1;
-        }
-
-        .loader-center-text {
-            position: absolute;
-            z-index: 10;
-            text-align: center;
-            pointer-events: none;
-            transition: opacity 1.2s ease-in-out, transform 1.5s ease-in-out;
-        }
-
-        /* Breathing Effect */
-        .breathing-text {
-            display: inline-block;
-            animation: breathing 3s ease-in-out infinite;
-        }
-
-        @keyframes breathing {
-            0%, 100% { transform: scale(1); text-shadow: 0 0 15px rgba(225,29,72,0.4); }
-            50% { transform: scale(1.05); text-shadow: 0 0 25px rgba(225,29,72,0.8), 0 0 10px rgba(225,29,72,0.5); }
-        }
-
-        /* Animated Gradient Text */
-        .animated-gradient-text {
-            background: linear-gradient(to right, #fda4af, #e11d48, #9f1239, #e11d48, #fda4af);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: gradientMove 3s linear infinite;
-            filter: drop-shadow(0 0 8px rgba(225,29,72,0.5));
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
+        .loader-text-reveal { animation: pulseFade 2s infinite ease-in-out; }
+        @keyframes pulseFade {
+            0%, 100% { opacity: 0.5; transform: scale(0.98); filter: drop-shadow(0 0 5px rgba(225,29,72,0.2)); }
+            50% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 20px rgba(225,29,72,0.8)); }
         }
 
         /* --- MAIN SITE STYLES --- */
-        #vanta-canvas { position: fixed; z-index: -2; top: 0; left: 0; width: 100vw; height: 100vh; }
-        
+/* --- MAIN SITE STYLES --- */
+        #vanta-canvas { 
+            position: fixed; z-index: -2; top: 0; left: 0; width: 100vw; height: 100vh; 
+            mix-blend-mode: screen; /* السطر ده هو السحر اللي هيشيل الخطوط السودة */
+        }        
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #881337; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #9f1239; }
+        ::-webkit-scrollbar-thumb { background: #160c52; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5f0820; }
 
         .scrolling-image {
             width: 100%;
@@ -110,114 +134,264 @@
             transform: translateY(calc(-100% + 14rem));
         }
 
-        .typing-effect {
+        /* --- ENHANCED SMOOTH MARQUEE --- */
+        .marquee-wrapper {
+            display: flex;
             overflow: hidden;
-            border-right: 2px solid #e11d48;
-            white-space: nowrap;
-            margin: 0 auto;
-            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+            width: 100%;
+        }
+        .animate-marquee { 
+            display: flex;
+            flex-shrink: 0;
+            animation: marquee 30s linear infinite;
+            will-change: transform; /* السطر ده بيمنع التقطيع نهائياً */
+        }
+        .marquee-wrapper:hover .animate-marquee {
+            animation-play-state: paused; /* بيوقف الشريط لما تقف عليه */
+        }
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 0 2rem;
+            color: #9ca3af; /* رمادي فضي شيك جداً يتماشى مع اللوجو */
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+            cursor: crosshair;
+        }
+        .marquee-item:hover {
+            color: #ffffff; /* أبيض ناصع في الهوفر */
+            text-shadow: 0 0 15px rgba(225,29,72,0.8);
+            transform: scale(1.05);
+        }
+        .marquee-item svg {
+            width: 1.25rem; height: 1.25rem;
+            fill: none; 
+            stroke: #f3f4f6; /* الأيقونات بيضا دايماً عشان تنطق */
+            stroke-width: 2;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+        }
+        .marquee-item:hover svg {
+            stroke: #e11d48; /* لون أحمر ناري مع الهوفر */
+            filter: drop-shadow(0 0 12px rgba(225,29,72,0.9));
+            transform: scale(1.15) rotate(5deg); /* حركة روشة للأيقونة */
         }
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #e11d48; }
-        }
-
-        .animate-marquee { animation: marquee 25s linear infinite; }
+        
         @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
+            0% { transform: translate3d(0, 0, 0); } /* 3D عشان كارت الشاشة اللي يعالجه */
+            100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        .footer-live-bg {
-            background: linear-gradient(-45deg, #000000, #3e0413, #000000, #5a061d);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+        /* Back to Top Button visibility classes */
+        .btt-hidden {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            pointer-events: none;
         }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .btt-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
         }
 
-        .particle {
+        /* Editorial Typography adjustments */
+        .editorial-color { color: #EAE8E0; }
+
+        /* Custom 3D Node Styling */
+        .skill-node {
             position: absolute;
-            border-radius: 50%;
-            background: #e11d48;
-            filter: blur(3px);
-            animation: floatParticle 6s ease-in-out infinite alternate;
+            top: 50%;
+            left: 50%;
+            transform-origin: center center;
+            will-change: transform, opacity, z-index;
         }
-        @keyframes floatParticle {
-            0% { transform: translateY(0) scale(1); opacity: 0.2; }
-            100% { transform: translateY(-20px) scale(1.5); opacity: 0.6; }
+        .skill-icon-wrapper {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .skill-node:hover .skill-icon-wrapper {
+            transform: scale(1.3);
+            box-shadow: 0 0 20px var(--hover-color, rgba(225,29,72,0.8));
+            border-color: var(--hover-color, #e11d48);
+            background-color: #000;
+        }
+        .skill-tooltip {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .skill-node:hover .skill-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- CYBERPUNK GLITCH EFFECT --- */
+        .glitch-hover {
+            display: inline-block;
+            transition: all 0.1s ease;
+        }
+        .glitch-hover:hover {
+            animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            color: #fff;
+            text-shadow: 2px 2px #e11d48, -2px -2px #06b6d4;
+        }
+        @keyframes glitch-skew {
+            0% { transform: translate(0) skew(0deg); }
+            20% { transform: translate(-2px, 2px) skew(-5deg); text-shadow: 2px 2px #e11d48, -2px -2px #06b6d4; }
+            40% { transform: translate(2px, -2px) skew(5deg); text-shadow: -2px -2px #e11d48, 2px 2px #06b6d4; }
+            60% { transform: translate(-2px, -2px) skew(-5deg); text-shadow: 2px -2px #e11d48, -2px 2px #06b6d4; }
+            80% { transform: translate(2px, 2px) skew(5deg); text-shadow: -2px 2px #e11d48, 2px -2px #06b6d4; }
+            100% { transform: translate(0) skew(0deg); }
+        }
+
+        /* Hide Scrollbar for GitHub Grid */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        
+    
+        
     </style>
 </head>
+
 <body class="font-tech antialiased flex flex-col min-h-screen relative selection:bg-rose-900 selection:text-white loading-active">
 
-    <div id="loader-wrapper">
-        <div id="loader-webgl"></div>
-        <div id="loading-text" class="loader-center-text px-4 w-full">
-            <h1 class="breathing-text text-white text-5xl md:text-7xl font-extrabold tracking-tighter mb-4">
-                Ezz Eldin <span class="text-rose-600">.</span>
-            </h1>
-            <p class="text-rose-500/70 font-tech text-xs md:text-sm tracking-[0.4em] uppercase animate-pulse mt-2">
-                Engineering for Dominance
-            </p>
-        </div>
+    <div class="aurora-bg">
+        <div class="aurora-blob aurora-1"></div>
+        <div class="aurora-blob aurora-2"></div>
+        <div class="aurora-blob aurora-3"></div>
     </div>
+
+    <div id="loader-wrapper" class="flex-col gap-6 md:gap-10">
+        <img src="src/LOGO EE.png" alt="E.E Logo" class="w-48 h-48 md:w-72 md:h-72 object-contain drop-shadow-[0_0_30px_rgba(225,29,72,0.8)] animate-pulse relative z-10">
+        
+        <h1 class="loader-text-reveal text-white text-3xl sm:text-5xl font-logo tracking-widest text-center relative z-10">
+            E.E Technologies<span class="text-rose-600">.</span>
+        </h1>
+        
+        <div id="loader-webgl" style="display: none;"></div>
+        <div id="loading-text" style="display: none;"></div>
+    </div>
+
     <div id="vanta-canvas"></div>
 
-    <header class="fixed w-full top-4 md:top-6 z-50 flex justify-center px-4">
-        <div class="w-full max-w-5xl bg-black/80 backdrop-blur-lg border border-rose-900/50 rounded-2xl md:rounded-full px-6 py-3 flex flex-wrap justify-between items-center shadow-[0_10px_30px_rgba(159,18,57,0.2)] relative">
-            <div class="text-xl font-extrabold tracking-tighter text-white flex items-center gap-2 cursor-pointer z-50">
-                <span class="text-rose-600 drop-shadow-[0_0_8px_rgba(159,18,57,0.8)]"><i class="fas fa-code text-sm"></i></span> EZZ.
+    <header class="fixed w-full top-4 md:top-6 z-50 flex justify-center px-4" data-aos="fade-down" data-aos-duration="1000">
+        <div class="w-full max-w-6xl bg-black/80 backdrop-blur-lg border border-rose-900/50 rounded-2xl md:rounded-full px-4 lg:px-6 py-3 flex justify-between items-center shadow-[0_10px_30px_rgba(159,18,57,0.2)] relative">
+            
+            <div class="font-logo text-sm md:text-lg tracking-widest text-white flex items-center gap-3 cursor-pointer z-50 shrink-0">
+                <img src="src/LOGO EE.png" alt="Logo" class="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-[0_0_10px_rgba(225,29,72,0.8)] mix-blend-lighten">                <span class="hidden sm:inline-block">E.E Tech.</span>
             </div>
 
             <button id="menu-btn" class="md:hidden text-gray-300 hover:text-rose-400 text-xl z-50 focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
 
-            <nav id="mobile-menu" class="hidden md:flex absolute md:static top-full left-0 w-full md:w-auto bg-black/95 md:bg-transparent border border-rose-900/50 md:border-none rounded-b-2xl md:rounded-none mt-3 md:mt-0 p-6 md:p-0 flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8 items-center z-40 transition-all shadow-xl md:shadow-none">
-                <a href="#hero" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-sm tracking-widest uppercase">Home</a>
-                <a href="#skills" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-sm tracking-widest uppercase">Stack</a>
-                <a href="#work" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-sm tracking-widest uppercase">Work</a>
-                <a href="#contact" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-sm tracking-widest uppercase">Contact</a>
+            <nav id="mobile-menu" class="hidden md:flex absolute md:static top-full left-0 w-full md:w-auto bg-black/95 md:bg-transparent border border-rose-900/50 md:border-none rounded-b-2xl md:rounded-none mt-3 md:mt-0 p-6 md:p-0 flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-3 lg:space-x-6 items-center z-40 transition-all shadow-xl md:shadow-none">
+                <a href="#hero" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-[10px] lg:text-xs tracking-widest uppercase">Home</a>
+                <a href="#skills" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-[10px] lg:text-xs tracking-widest uppercase">Stack</a>
+                <a href="#expertise" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-[10px] lg:text-xs tracking-widest uppercase">Expertise</a>
+                <a href="#experience" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-[10px] lg:text-xs tracking-widest uppercase">Experience</a>
+                <a href="#field-ops" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-[10px] lg:text-xs tracking-widest uppercase">Field Ops</a>
+                <a href="#work" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-[10px] lg:text-xs tracking-widest uppercase">Work</a>
+                <a href="#contact" class="mobile-link text-gray-300 hover:text-rose-400 transition-colors duration-300 font-bold text-[10px] lg:text-xs tracking-widest uppercase">Contact</a>
                 <a href="#contact" class="mobile-link md:hidden px-8 py-3 rounded-full bg-rose-700 hover:bg-rose-600 text-white text-sm font-bold transition-all mt-4 inline-block w-full text-center shadow-[0_0_15px_rgba(159,18,57,0.5)]">Hire Me</a>
             </nav>
 
-            <a href="#contact" class="hidden md:block px-6 py-2 rounded-full bg-rose-700 hover:bg-rose-600 text-white text-sm font-bold transition-all duration-300 shadow-[0_0_15px_rgba(159,18,57,0.5)] z-50">
-                Let's Connect !
+            <a href="#contact" class="hidden md:block shrink-0 px-4 lg:px-6 py-2 rounded-full bg-rose-700 hover:bg-rose-600 text-white text-xs lg:text-sm font-bold transition-all duration-300 shadow-[0_0_15px_rgba(159,18,57,0.5)] z-50">
+                Hire Me
             </a>
         </div>
     </header>
 
-    <main id="hero" class="container mx-auto px-4 pt-36 md:pt-48 pb-16 min-h-screen flex flex-col items-center justify-center relative z-10 text-center">
+    <main id="hero" class="container mx-auto px-4 pt-48 pb-16 min-h-screen flex flex-col items-center justify-center relative z-10 text-center">
         
-        <div class="inline-block px-4 py-1.5 rounded-full bg-rose-950/70 border border-rose-800/50 text-rose-300 text-[10px] md:text-xs font-bold mb-6 md:mb-8 backdrop-blur-sm uppercase tracking-widest shadow-[0_0_15px_rgba(159,18,57,0.3)]">
-            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span> Available for new projects
-        </div>
-        
-        <div class="inline-block max-w-full overflow-hidden mb-2 md:mb-4">
-            <h1 class="typing-effect text-3xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tighter">
-                I'm <span class="text-rose-600">Ezz Eldin</span>
-            </h1>
-        </div>
-
-        <h2 class="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-6 md:mb-10 tracking-tighter drop-shadow-lg leading-tight text-white max-w-4xl px-2">
-            Architecting <span class="animated-gradient-text">Scalable</span> Digital Ecosystems.
-        </h2>
-        
-        <p class="text-sm md:text-lg text-gray-400 mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md px-2">
-            Innovative Software Engineer and Systems Architect <br> with deep expertise in Full-Stack & DevOps development <br> and scalable web infrastructures. Skilled in designing and optimizing high-performance, data-driven solutions with a strong emphasis on reliability, security, and clean architecture. Committed to transforming complex ideas into elegant, efficient systems that drive business growth.
+        <p class="text-[10px] md:text-xs tracking-[0.4em] editorial-color/70 uppercase mb-8 md:mb-10 font-tech" data-aos="fade-up" data-aos-delay="800">
+            UI / UX &bull; Full-Stack &bull; DevOps
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto px-4">
+        <div class="font-tech flex flex-col items-center w-full relative z-10" data-aos="fade-up" data-aos-delay="1000">
+            
+            <div class="relative flex justify-center items-center mb-2 mt-4">
+                <img src="src/LOGO EE.png" alt="E.E Shield" class="w-56 h-56 md:w-80 md:h-80 object-contain relative z-10 mix-blend-lighten">
+            </div>
+
+            <h1 class="text-5xl sm:text-7xl md:text-[6.5rem] lg:text-[8.5rem] font-extrabold tracking-tighter uppercase text-white leading-[0.9] relative z-10 mt-4">
+                Architecting Digital
+            </h1>
+            <h1 class="text-5xl sm:text-7xl md:text-[6.5rem] lg:text-[8.5rem] font-extrabold tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-b from-gray-200 to-gray-600 leading-[0.9] relative z-10 drop-shadow-lg">
+                Dominance
+            </h1>
+            
+            <div class="flex flex-col md:flex-row items-center gap-3 md:gap-6 mt-10 font-mono relative z-10">
+                <span class="text-[10px] md:text-xs font-bold tracking-widest text-gray-400 uppercase border border-neutral-800/80 px-5 py-2.5 rounded-sm bg-[#050505] shadow-inner">
+                    <i class="fas fa-terminal mr-2 text-rose-700"></i> Speak Less. Code More.
+                </span>
+                <span class="text-[10px] md:text-xs font-bold tracking-widest text-gray-200 uppercase border border-rose-900/50 px-5 py-2.5 rounded-sm bg-rose-950/30 backdrop-blur-sm shadow-[0_0_15px_rgba(159,18,57,0.2)]">
+                    <i class="fas fa-bolt mr-2 text-rose-500 animate-pulse"></i> LIVE IN 7 DAYS.
+                </span>
+            </div>
+            <p class="text-xs md:text-sm text-gray-500 mt-6 font-mono tracking-widest uppercase relative z-10">
+                We don't just build websites.
+            </p>
+        </div>
+
+        <div class="w-full max-w-3xl mx-auto mt-16 md:mt-24 mb-6 text-left" data-aos="fade-up" data-aos-delay="1200">
+            <div class="bg-[#080808]/80 border border-neutral-800 rounded-xl overflow-hidden shadow-[0_15px_40px_rgba(225,29,72,0.15)] relative backdrop-blur-md">
+                <div class="bg-[#121212]/90 border-b border-neutral-800 px-4 py-3 flex items-center justify-between">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    </div>
+                    <div class="text-neutral-500 text-[10px] md:text-xs font-mono tracking-widest uppercase">bash -- ezz@server:~</div>
+                    <div class="w-12"></div> </div>
+                <div class="p-6 md:p-8 font-mono text-sm md:text-base leading-relaxed text-gray-300">
+                    <div class="mb-4">
+                        <span class="text-rose-500 font-bold">ezz@ee-tech:~$</span>
+                        <span class="text-gray-200 ml-2">About_me.txt</span>
+                    </div>
+                    <div class="text-gray-400 pl-4 border-l border-neutral-700/50">
+                        Innovative Software Engineer and Systems Architect <br class="hidden md:block"> 
+                        with deep expertise in Full-Stack & DevOps development <br class="hidden md:block"> 
+                        and scalable web infrastructures. Skilled in designing and <br class="hidden md:block">
+                        optimizing high-performance, data-driven solutions with a <br class="hidden md:block">
+                        strong emphasis on reliability, security, and clean architecture. <br class="hidden md:block">
+                        Committed to transforming complex ideas into elegant, <br class="hidden md:block">
+                        efficient systems that drive business growth.<span class="inline-block w-2.5 h-4 md:h-5 bg-rose-500 ml-1 translate-y-1 animate-pulse"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-3xl mx-auto mb-10" data-aos="fade-up" data-aos-delay="1300">
+            <div class="flex items-center justify-between mb-2 px-2 font-mono text-[10px] md:text-xs">
+                <span class="text-gray-400"><i class="fab fa-github mr-1 text-white"></i> 1,423 contributions in the last year</span>
+                <div class="flex items-center gap-1 text-gray-500 hidden sm:flex">
+                    <span>Less</span>
+                    <div class="w-2.5 h-2.5 rounded-sm bg-neutral-900 border border-neutral-800"></div>
+                    <div class="w-2.5 h-2.5 rounded-sm bg-rose-950"></div>
+                    <div class="w-2.5 h-2.5 rounded-sm bg-rose-800"></div>
+                    <div class="w-2.5 h-2.5 rounded-sm bg-rose-600"></div>
+                    <div class="w-2.5 h-2.5 rounded-sm bg-rose-400"></div>
+                    <span>More</span>
+                </div>
+            </div>
+            <div class="bg-[#080808]/80 border border-neutral-800 rounded-xl p-3 md:p-4 shadow-[0_15px_40px_rgba(225,29,72,0.1)] backdrop-blur-md overflow-x-auto hide-scrollbar cursor-crosshair">
+                <div id="github-grid" class="flex gap-1 md:gap-1.5 w-max mx-auto"></div>
+            </div>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto px-4 font-tech" data-aos="fade-up" data-aos-delay="1400">
             <a href="#work" class="px-6 md:px-8 py-3.5 md:py-4 rounded-full bg-rose-700 hover:bg-rose-600 text-white font-bold transition-all duration-300 shadow-[0_0_20px_rgba(159,18,57,0.4)] hover:shadow-[0_0_30px_rgba(159,18,57,0.6)] hover:-translate-y-1 w-full sm:w-auto text-center text-sm md:text-base">
                 Explore My Work <i class="fas fa-arrow-down ml-2"></i>
             </a>
@@ -227,116 +401,394 @@
         </div>
     </main>
 
-    <div class="flex overflow-hidden bg-rose-950/40 backdrop-blur-sm border-y border-rose-900/50 py-3 md:py-4 z-10 whitespace-nowrap shadow-[0_0_20px_rgba(159,18,57,0.1)]">
-        <div class="animate-marquee inline-block">
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🚀 High-Performance Web Apps</span>
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">✨ Pixel-Perfect UI/UX</span>
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">⚡ Scalable Architecture</span>
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🛠️ Clean Code</span>
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🔥 Full-Stack Mastery</span>
+    <div class="marquee-wrapper bg-black/60 backdrop-blur-md border-y border-rose-900/40 py-4 z-10 shadow-[0_0_20px_rgba(159,18,57,0.1)]" data-aos="fade-in">
+        <div class="animate-marquee font-tech">
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+                High-Performance Web Apps
+            </div>
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                Scalable Architecture
+            </div>
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+                Pixel-Perfect UI/UX
+            </div>
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                Clean Code
+            </div>
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                Full-Stack Mastery
+            </div>
         </div>
-        <div class="animate-marquee inline-block">
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🚀 High-Performance Web Apps</span>
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">✨ Pixel-Perfect UI/UX</span>
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">⚡ Scalable Architecture</span>
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🛠️ Clean Code</span>
-            <span class="mx-4 md:mx-8 text-rose-300/80 font-extrabold tracking-widest uppercase text-xs md:text-sm">🔥 Full-Stack Mastery</span>
+        <div class="animate-marquee font-tech">
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+                High-Performance Web Apps
+            </div>
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                Scalable Architecture
+            </div>
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+                Pixel-Perfect UI/UX
+            </div>
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                Clean Code
+            </div>
+            <div class="marquee-item">
+                <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                Full-Stack Mastery
+            </div>
         </div>
     </div>
 
-    <section id="skills" class="py-20 md:py-24 relative z-10 bg-black/40 backdrop-blur-md">
-        <div class="container mx-auto px-4 md:px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white tracking-tight">
-                Tech <span class="animated-gradient-text">Stack</span>
-            </h2>
-            <p class="text-sm md:text-base text-gray-400 mb-10 md:mb-14 max-w-2xl mx-auto">Technologies and tools I use to bring ideas to life.</p>
-            
-            <div class="flex flex-wrap justify-center gap-3 md:gap-4 max-w-5xl mx-auto">
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                    <i class="fab fa-react text-blue-400 text-lg"></i> React.js
+    <section id="skills" class="py-20 md:py-32 relative z-10 bg-black/20 backdrop-blur-sm overflow-hidden font-tech border-t border-rose-900/40">
+        <div class="container mx-auto px-4 max-w-6xl relative z-10">
+            <div class="flex flex-col items-center justify-center mb-12" data-aos="fade-up">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/40 border border-rose-800/50 text-rose-300 text-xs font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(159,18,57,0.3)] mb-4">
+                    <i class="fas fa-cube"></i> Tech_Arsenal.json
                 </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                    <i class="fab fa-neos text-white text-lg"></i> Next.js
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight glitch-hover cursor-crosshair">
+                    Tech <span class="animated-gradient-text">Universe</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex flex-col items-center justify-center p-6 bg-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-blue-500/80 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all group">
+                    <i class="fab fa-react text-4xl text-blue-400 group-hover:scale-110 transition-transform mb-3"></i>
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-300">React.js</span>
                 </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-400 hover:shadow-[0_0_15px_rgba(74,222,128,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                    <i class="fab fa-vuejs text-green-500 text-lg"></i> Vue.js
+                <div class="flex flex-col items-center justify-center p-6 bg-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all group">
+                    <span class="font-bold text-4xl text-white group-hover:scale-110 transition-transform mb-3">Nx</span>
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-300">Next.js</span>
                 </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                    <i class="text-blue-500 font-bold text-lg">TS</i> TypeScript
+                <div class="flex flex-col items-center justify-center p-6 bg-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-blue-600/80 hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all group">
+                    <span class="font-bold text-4xl text-blue-500 group-hover:scale-110 transition-transform mb-3">TS</span>
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-300">TypeScript</span>
                 </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-yellow-400 hover:shadow-[0_0_15px_rgba(250,204,21,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                    <i class="fab fa-js text-yellow-400 text-lg"></i> JavaScript
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                    <i class="fab fa-css3-alt text-cyan-400 text-lg"></i> Tailwind CSS
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                    <i class="fas fa-code-branch text-purple-500 text-lg"></i> Redux / Zustand
+                <div class="flex flex-col items-center justify-center p-6 bg-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-green-500/80 hover:shadow-[0_0_20px_rgba(34,197,94,0.3)] transition-all group">
+                    <i class="fab fa-node-js text-4xl text-green-500 group-hover:scale-110 transition-transform mb-3"></i>
+                    <span class="text-xs font-bold tracking-widest uppercase text-gray-300">Node.js</span>
                 </div>
 
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fab fa-node-js text-green-500 text-lg"></i> Node.js
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-gray-300 hover:shadow-[0_0_15px_rgba(209,213,219,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fas fa-server text-gray-300 text-lg"></i> Express.js
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fab fa-python text-yellow-500 text-lg"></i> Python / Django
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-green-600 hover:shadow-[0_0_15px_rgba(22,163,74,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fas fa-leaf text-green-600 text-lg"></i> MongoDB
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fas fa-database text-blue-400 text-lg"></i> PostgreSQL
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-indigo-400 hover:shadow-[0_0_15px_rgba(129,140,248,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fas fa-layer-group text-indigo-400 text-lg"></i> Prisma ORM
+                <div class="col-span-2 md:col-span-2 p-6 bg-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-rose-500/80 hover:shadow-[0_0_20px_rgba(225,29,72,0.3)] transition-all group">
+                    <h3 class="text-rose-400 font-bold mb-4 uppercase tracking-widest text-sm flex items-center gap-2"><i class="fas fa-server"></i> Cloud & DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300"><i class="fab fa-docker text-blue-400"></i> Docker</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300"><i class="fab fa-aws text-orange-500"></i> AWS</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300"><i class="fab fa-linux"></i> Linux / Ubuntu</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-blue-500 font-bold">K8s</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300"><i class="fas fa-terminal"></i> Bash</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-purple-400 font-bold">Terraform</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-red-500 font-bold">Ansible</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300"><i class="fab fa-jenkins text-red-600"></i> Jenkins</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300"><i class="fab fa-github"></i> Actions</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 font-bold">▲ Vercel</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-green-500 font-bold">Nginx</span>
+                    </div>
                 </div>
 
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fab fa-git-alt text-orange-500 text-lg"></i> Git & GitHub
+                <div class="col-span-2 md:col-span-2 p-6 bg-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-indigo-500/80 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all group">
+                    <h3 class="text-indigo-400 font-bold mb-4 uppercase tracking-widest text-sm flex items-center gap-2"><i class="fas fa-database"></i> Backend & Data</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300"><i class="fab fa-python text-blue-400"></i> Python / Django</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-blue-300"><i class="fas fa-database"></i> PostgreSQL</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-green-500"><i class="fas fa-leaf"></i> MongoDB</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-red-500 font-bold">Redis</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-purple-500 font-bold">Prisma</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 font-bold">Express.js</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-pink-500 font-bold">GraphQL</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-yellow-500"><i class="fas fa-fire"></i> Firebase</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-emerald-400 font-bold">Supabase</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-teal-400"><i class="fas fa-network-wired"></i> REST API</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-orange-500"><i class="fas fa-plug"></i> WebSockets</span>
+                    </div>
                 </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-blue-600 hover:shadow-[0_0_15px_rgba(37,99,235,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fab fa-docker text-blue-600 text-lg"></i> Docker
+
+                <div class="col-span-2 md:col-span-3 p-6 bg-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-cyan-500/80 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all group">
+                    <h3 class="text-cyan-400 font-bold mb-4 uppercase tracking-widest text-sm flex items-center gap-2"><i class="fas fa-laptop-code"></i> Frontend Ecosystem</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-yellow-400"><i class="fab fa-js"></i> JavaScript</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-emerald-400"><i class="fab fa-vuejs"></i> Vue.js</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-cyan-400"><i class="fas fa-wind"></i> Tailwind</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-purple-400"><i class="fas fa-code-branch"></i> Redux</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-pink-400"><i class="fab fa-sass"></i> SASS</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-blue-500 font-bold">Vite</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-blue-300 font-bold">Webpack</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-green-400 font-bold">GSAP</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-blue-600 font-bold">Framer Motion</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 font-bold">Three.js / 3D</span>
+                    </div>
                 </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-orange-400 hover:shadow-[0_0_15px_rgba(251,146,60,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fab fa-aws text-orange-400 text-lg"></i> AWS
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-pink-500 hover:shadow-[0_0_15px_rgba(236,72,153,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fas fa-exchange-alt text-pink-500 text-lg"></i> REST & GraphQL
-                </div>
-                <div class="px-4 py-2 md:px-5 md:py-2.5 rounded-md bg-neutral-900/80 border border-neutral-800 text-gray-300 hover:text-white hover:border-rose-500 hover:shadow-[0_0_15px_rgba(225,29,72,0.3)] transition-all duration-300 cursor-default flex items-center gap-2 md:gap-3 mt-1 md:mt-2 text-sm md:text-base">
-                    <i class="fab fa-figma text-rose-500 text-lg"></i> Figma
+
+                <div class="col-span-2 md:col-span-1 p-6 bg-neutral-900/60 border border-neutral-700/50 rounded-2xl hover:border-yellow-500/80 hover:shadow-[0_0_20px_rgba(234,179,8,0.3)] transition-all group">
+                    <h3 class="text-yellow-400 font-bold mb-4 uppercase tracking-widest text-sm flex items-center gap-2"><i class="fas fa-tools"></i> Tools & Test</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-orange-600"><i class="fab fa-git-alt"></i> Git</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-red-400"><i class="fab fa-figma"></i> Figma</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-red-600 font-bold">Jest</span>
+                        <span class="px-2 py-1 bg-black/50 border border-neutral-700 rounded text-xs text-gray-300 text-teal-400 font-bold">Cypress</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="work" class="py-20 md:py-24 relative z-10 overflow-hidden">
+    <section id="expertise" class="py-20 md:py-24 relative z-10 border-t border-rose-900/40 bg-black/40 backdrop-blur-md overflow-hidden font-tech">
+        <div class="container mx-auto px-4 md:px-6 relative z-10">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 text-white tracking-tight glitch-hover cursor-crosshair">
+                    Core <span class="animated-gradient-text">Expertise</span>
+                </h2>
+            </div>
+            <p class="text-sm md:text-base text-gray-300 text-center mb-10 md:mb-16 max-w-2xl mx-auto drop-shadow-md" data-aos="fade-up" data-aos-delay="100">Going beyond writing code—architecting solutions that solve real business problems with precision and scale.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
+                <div class="p-8 rounded-2xl bg-neutral-900/60 border border-neutral-700/50 hover:border-rose-500/50 hover:bg-neutral-800/60 transition-all duration-500 group relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-rose-600/20 blur-[50px] rounded-full group-hover:bg-rose-500/30 transition-colors duration-500"></div>
+                    <i class="fas fa-layer-group text-4xl text-rose-500 mb-6 drop-shadow-[0_0_10px_rgba(225,29,72,0.5)] group-hover:scale-110 transition-transform duration-300"></i>
+                    <h3 class="text-xl font-bold text-white mb-4">Frontend Engineering</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Crafting immersive, pixel-perfect, and highly interactive user interfaces. I specialize in React, Next.js, and advanced animations to ensure every digital touchpoint is smooth and engaging.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-neutral-900/60 border border-neutral-700/50 hover:border-indigo-500/50 hover:bg-neutral-800/60 transition-all duration-500 group relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-indigo-600/20 blur-[50px] rounded-full group-hover:bg-indigo-500/30 transition-colors duration-500"></div>
+                    <i class="fas fa-server text-4xl text-indigo-400 mb-6 drop-shadow-[0_0_10px_rgba(99,102,241,0.5)] group-hover:scale-110 transition-transform duration-300"></i>
+                    <h3 class="text-xl font-bold text-white mb-4">Backend Architecture</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Designing robust, secure, and scalable server-side systems. From complex database structures (SQL/NoSQL) to high-performance RESTful and GraphQL APIs using Node.js and Python.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-neutral-900/60 border border-neutral-700/50 hover:border-emerald-500/50 hover:bg-neutral-800/60 transition-all duration-500 group relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)]" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-emerald-600/20 blur-[50px] rounded-full group-hover:bg-emerald-500/30 transition-colors duration-500"></div>
+                    <i class="fas fa-rocket text-4xl text-emerald-500 mb-6 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)] group-hover:scale-110 transition-transform duration-300"></i>
+                    <h3 class="text-xl font-bold text-white mb-4">Performance & DevOps</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Ensuring your application runs flawlessly under load. I implement CI/CD pipelines, containerization with Docker, and cloud deployments (AWS/Linux) for zero-downtime scaling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 md:py-24 relative z-10 border-t border-rose-900/40 bg-black/70 backdrop-blur-md overflow-hidden font-tech">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-rose-900/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="container mx-auto px-4 md:px-6 relative z-10">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 text-white tracking-tight glitch-hover cursor-crosshair">
+                    Current <span class="animated-gradient-text">Command</span>
+                </h2>
+            </div>
+            <p class="text-sm md:text-base text-gray-300 text-center mb-10 md:mb-16 max-w-2xl mx-auto drop-shadow-md" data-aos="fade-up" data-aos-delay="100">My professional trajectory and core responsibilities driving impact at scale.</p>
+
+            <div class="max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-8 md:p-12 rounded-[2rem] bg-neutral-900/50 border border-neutral-700/50 backdrop-blur-xl relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] group hover:border-rose-500/50 transition-colors duration-500">
+                    
+                    <div class="absolute -top-32 -right-32 w-96 h-96 bg-rose-600/10 blur-[100px] rounded-full group-hover:bg-rose-500/20 transition-colors duration-700"></div>
+
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-neutral-800/80 pb-8 mb-10 relative z-10">
+                        <div class="flex items-center gap-5">
+                            <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-black border border-neutral-700 flex items-center justify-center shadow-lg">
+                                <i class="fas fa-landmark text-3xl md:text-4xl text-rose-500 drop-shadow-[0_0_10px_rgba(225,29,72,0.5)]"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl md:text-3xl font-bold text-white mb-1 tracking-tight">Centre d'Études Alexandrines</h3>
+                                <p class="text-rose-400 font-mono text-xs md:text-sm tracking-wider">UAR 3134 DU CNRS / IFAO</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 md:mt-0 flex flex-col md:items-end">
+                            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-neutral-700/80 text-[10px] md:text-xs text-gray-300 font-bold tracking-widest uppercase shadow-inner">
+                                <i class="fas fa-map-marker-alt text-rose-500"></i> Alexandria, Egypt · On-site
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-6 md:pl-10 border-l-2 border-neutral-800 space-y-12 relative z-10">
+                        <div class="relative">
+                            <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-rose-500 shadow-[0_0_15px_rgba(225,29,72,1)] z-20">
+                                <div class="absolute inset-0 rounded-full bg-rose-400 animate-ping opacity-75"></div>
+                            </div>
+                            
+                            <h4 class="text-2xl md:text-3xl font-extrabold text-white mb-1">Software Engineer</h4>
+                            <div class="flex flex-wrap items-center gap-3 mb-6">
+                                <span class="text-gray-400 text-sm md:text-base font-mono">Jun 2025 - Present · 10 mos</span>
+                                <span class="px-2.5 py-0.5 rounded bg-rose-950/50 text-rose-300 border border-rose-800/50 text-xs font-bold uppercase tracking-wider">Full-time</span>
+                            </div>
+                            
+                            <ul class="space-y-3.5 text-gray-300 text-sm md:text-base leading-relaxed max-w-3xl">
+                                <li class="flex items-start group/item">
+                                    <i class="fas fa-terminal text-rose-500 mt-1 mr-3 text-xs group-hover/item:text-rose-400 transition-colors"></i> 
+                                    <span>Working on end-to-end web development (frontend & backend) with focus on building scalable and reliable applications.</span>
+                                </li>
+                                <li class="flex items-start group/item">
+                                    <i class="fas fa-terminal text-rose-500 mt-1 mr-3 text-xs group-hover/item:text-rose-400 transition-colors"></i> 
+                                    <span>Handling deployment pipelines and working with containerization (Docker) to ensure smooth delivery.</span>
+                                </li>
+                                <li class="flex items-start group/item">
+                                    <i class="fas fa-terminal text-rose-500 mt-1 mr-3 text-xs group-hover/item:text-rose-400 transition-colors"></i> 
+                                    <span>Managing and monitoring servers, networking, and infrastructure to maintain system stability.</span>
+                                </li>
+                                <li class="flex items-start group/item">
+                                    <i class="fas fa-terminal text-rose-500 mt-1 mr-3 text-xs group-hover/item:text-rose-400 transition-colors"></i> 
+                                    <span>Collaborating across teams to deliver high-quality software solutions and continuously improve performance.</span>
+                                </li>
+                                <li class="flex items-start group/item">
+                                    <i class="fas fa-terminal text-rose-500 mt-1 mr-3 text-xs group-hover/item:text-rose-400 transition-colors"></i> 
+                                    <span>Exploring and applying best practices in software engineering, DevOps, and cloud environments.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="relative opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            <div class="absolute -left-[29px] md:-left-[45px] top-1.5 w-3 h-3 rounded-full bg-neutral-600 border border-neutral-800 z-20"></div>
+                            
+                            <h4 class="text-xl md:text-2xl font-bold text-gray-200 mb-1">Software Engineer Intern</h4>
+                            <div class="flex flex-wrap items-center gap-3 mb-5">
+                                <span class="text-gray-500 text-sm font-mono">Mar 2025 - Jun 2025 · 4 mos</span>
+                                <span class="px-2.5 py-0.5 rounded bg-neutral-800 text-gray-300 border border-neutral-700 text-xs font-bold uppercase tracking-wider">Internship</span>
+                            </div>
+                            
+                            <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-4xl">
+                                Gained hands-on experience in software engineering and systems infrastructure. Developed backend services using Node.js while being directly exposed to physical servers setup, configuration, and monitoring. Explored complete network infrastructures and their role in scalable applications. Implemented automation scripts for tasks like XML generation from structured data, applying industry best practices in OOP, debugging, testing, and clean code within a collaborative environment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-neutral-800/80 relative z-10">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mb-4">Core Ecosystem Utilized:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 bg-black/60 border border-neutral-700 rounded-md text-xs text-gray-300 font-bold flex items-center gap-1.5 hover:border-rose-500/50 hover:text-white transition-colors cursor-default"><i class="fas fa-server text-indigo-400"></i> Software Infrastructure</span>
+                            <span class="px-3 py-1.5 bg-black/60 border border-neutral-700 rounded-md text-xs text-gray-300 font-bold flex items-center gap-1.5 hover:border-rose-500/50 hover:text-white transition-colors cursor-default"><i class="fas fa-globe text-blue-400"></i> Internet Software</span>
+                            <span class="px-3 py-1.5 bg-black/60 border border-neutral-700 rounded-md text-xs text-gray-300 font-bold flex items-center gap-1.5 hover:border-rose-500/50 hover:text-white transition-colors cursor-default"><i class="fab fa-node-js text-green-500"></i> Node.js</span>
+                            <span class="px-3 py-1.5 bg-black/60 border border-neutral-700 rounded-md text-xs text-gray-300 font-bold flex items-center gap-1.5 hover:border-rose-500/50 hover:text-white transition-colors cursor-default"><i class="fab fa-docker text-blue-500"></i> Docker</span>
+                            <span class="px-3 py-1.5 bg-black/60 border border-neutral-700 rounded-md text-xs text-gray-300 font-bold flex items-center gap-1.5 hover:border-rose-500/50 hover:text-white transition-colors cursor-default"><i class="fas fa-network-wired text-purple-400"></i> Networking</span>
+                            <span class="px-3 py-1.5 bg-black/60 border border-neutral-700 rounded-md text-xs text-gray-300 font-bold flex items-center gap-1.5 hover:border-rose-500/50 hover:text-white transition-colors cursor-default"><i class="fas fa-cogs text-gray-400"></i> DevOps</span>
+                            <span class="px-3 py-1.5 bg-black/60 border border-neutral-700 rounded-md text-xs text-gray-300 font-bold flex items-center gap-1.5 hover:border-rose-500/50 hover:text-white transition-colors cursor-default font-mono">+17 more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="field-ops" class="py-20 md:py-24 relative z-10 border-t border-rose-900/40 bg-black/60 backdrop-blur-sm overflow-hidden font-tech">
+        <div class="container mx-auto px-4 md:px-6 relative z-10">
+            
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 text-white tracking-tight glitch-hover cursor-crosshair">
+                    Field <span class="animated-gradient-text">Operations</span>
+                </h2>
+                <p class="text-sm md:text-base text-gray-400 text-center mb-12 md:mb-16 max-w-2xl mx-auto">Bridging the gap between software engineering and massive physical infrastructure.</p>
+            </div>
+
+            <div class="max-w-6xl mx-auto bg-neutral-900/60 border border-neutral-800 rounded-2xl md:rounded-[2rem] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-md" data-aos="fade-up" data-aos-delay="200">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                    
+                    <div class="lg:col-span-5 p-8 md:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-neutral-800 relative z-10">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-rose-950/40 border border-rose-900/50 text-rose-400 text-[10px] font-bold uppercase tracking-widest mb-6 w-fit">
+                            <i class="fas fa-satellite-dish animate-pulse"></i> Mission Brief
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-white mb-4 leading-tight">
+                            France Infrastructure Tour & Data Centers
+                        </h3>
+                        
+                        <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+                            Recently completed a strategic mission to France, gaining exclusive, hands-on access to massive and highly secure data centers. I explored military-grade server farms and the renowned nuclear research computing hubs (including <span class="text-rose-300 font-bold">CC-IN2P3 / CNRS</span>).
+                            <br><br>
+                            This exposure to hyper-scale physical servers, advanced fiber-optic networks, and industrial cooling systems directly informs how I architect robust, fault-tolerant cloud environments and scalable DevOps pipelines.
+                        </p>
+
+                        <div class="bg-[#050505] border border-rose-900/40 rounded-lg p-4 mb-8 shadow-[0_0_15px_rgba(225,29,72,0.1)] relative">
+                            <div class="flex gap-1.5 mb-2">
+                                <div class="w-2 h-2 rounded-full bg-rose-600 animate-pulse shadow-[0_0_5px_rgba(225,29,72,0.8)]"></div>
+                                <div class="w-2 h-2 rounded-full bg-neutral-700"></div>
+                                <div class="w-2 h-2 rounded-full bg-neutral-700"></div>
+                            </div>
+                            <p class="font-mono text-[11px] md:text-xs leading-relaxed text-rose-400/90">
+                                <span class="text-rose-500 font-bold">> [SYSTEM_WARNING]:</span><br>
+                                Due to strict security clearances and NDAs, several other classified facilities I operated within remain strictly undisclosed.
+                            </p>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-2.5 py-1 bg-black border border-neutral-800 text-xs text-gray-300 rounded font-mono">#CC-IN2P3</span>
+                            <span class="px-2.5 py-1 bg-black border border-neutral-800 text-xs text-gray-300 rounded font-mono">#France</span>
+                            <span class="px-2.5 py-1 bg-black border border-neutral-800 text-xs text-gray-300 rounded font-mono">#DataCenters</span>
+                            <span class="px-2.5 py-1 bg-black border border-neutral-800 text-xs text-gray-300 rounded font-mono">#HardwareArchitecture</span>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 bg-black/80 p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 relative">
+                        <div class="absolute inset-0 pointer-events-none border-[1px] border-rose-500/10 mix-blend-overlay" style="background-image: linear-gradient(0deg, transparent 24%, rgba(225, 29, 72, .05) 25%, rgba(225, 29, 72, .05) 26%, transparent 27%, transparent 74%, rgba(225, 29, 72, .05) 75%, rgba(225, 29, 72, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(225, 29, 72, .05) 25%, rgba(225, 29, 72, .05) 26%, transparent 27%, transparent 74%, rgba(225, 29, 72, .05) 75%, rgba(225, 29, 72, .05) 76%, transparent 77%, transparent); background-size: 50px 50px;"></div>
+                        
+                        <div class="rounded-xl overflow-hidden group relative h-48 md:h-64 border border-neutral-800">
+                            <img src="src/1.jpeg" alt="Server Rack Details" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <span class="text-xs text-rose-300 font-mono">Node Connectivity</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rounded-xl overflow-hidden group relative h-48 md:h-64 border border-neutral-800">
+                            <img src="src/2.jpeg" alt="Data Center Aisle" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <span class="text-xs text-rose-300 font-mono">Server Farm Aisle</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rounded-xl overflow-hidden group relative h-48 md:h-64 border border-neutral-800">
+                            <img src="src/3.jpeg" alt="CC-IN2P3 System" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <span class="text-xs text-rose-300 font-mono">Nuclear Research Infrastructure</span>
+                            </div>
+                        </div>
+                        
+                        <div class="rounded-xl overflow-hidden group relative h-48 md:h-64 border border-neutral-800">
+                            <img src="src/4.jpeg" alt="CNRS Hardware" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-80 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <span class="text-xs text-rose-300 font-mono">CNRS Computing Center</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-20 md:py-24 relative z-10 border-t border-rose-900/40 overflow-hidden font-tech">
         
         <div id="vanta-work-bg" class="absolute inset-0 z-0"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-0 pointer-events-none"></div>
         
         <div class="container mx-auto px-4 md:px-6 relative z-10">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-3 md:mb-4 text-white tracking-tight">
-                Selected <span class="animated-gradient-text">Works</span>
-            </h2>
-            <p class="text-sm md:text-base text-gray-300 text-center mb-10 md:mb-16 max-w-2xl mx-auto drop-shadow-md">A showcase of scalable applications, seamless e-commerce, and modern interfaces.</p>
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 text-white tracking-tight glitch-hover cursor-crosshair">
+                    Selected <span class="animated-gradient-text">Works</span>
+                </h2>
+            </div>
+            <p class="text-sm md:text-base text-gray-300 text-center mb-10 md:mb-16 max-w-2xl mx-auto drop-shadow-md" data-aos="fade-up" data-aos-delay="100">A showcase of scalable applications, seamless e-commerce, and modern interfaces.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-                
-                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative" data-aos="fade-up" data-aos-delay="100">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-                    
                     <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/carta.png" alt="Carta Map" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
                             <i class="fas fa-map-marked-alt text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
-
                     <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Carta</h3>
+                        <div class="flex items-center gap-3 mb-2 md:mb-3">
+                            <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-rose-300 transition-colors m-0">Carta</h3>
+                            <div class="px-2.5 py-1 rounded bg-gradient-to-r from-rose-600 to-indigo-600 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider uppercase shadow-[0_0_10px_rgba(225,29,72,0.4)] flex items-center gap-1.5">
+                                 France
+                            </div>
+                        </div>
                         <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             An interactive mapping interface for CEAlex, designed to handle complex spatial data visualization, geographical exploration, and dynamic rendering.
                         </p>
@@ -359,18 +811,21 @@
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative" data-aos="fade-up" data-aos-delay="200">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-                    
                     <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/badz.png" alt="Badz Store" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
                             <i class="fas fa-shopping-bag text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
-
                     <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Badz Store</h3>
+                        <div class="flex items-center gap-3 mb-2 md:mb-3">
+                            <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-rose-300 transition-colors m-0">Badz Store</h3>
+                            <div class="px-2.5 py-1 rounded bg-gradient-to-r from-rose-600 to-indigo-600 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider uppercase shadow-[0_0_10px_rgba(225,29,72,0.4)] flex items-center gap-1.5">
+                                 Egypt
+                            </div>
+                        </div>
                         <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             A seamless e-commerce experience designed for high conversion rates. Features a sleek product gallery, cart state management, and secure checkout.
                         </p>
@@ -392,18 +847,21 @@
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative" data-aos="fade-up" data-aos-delay="300">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-                    
                     <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/alpha.png" alt="Alpha Call Centers" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
                             <i class="fas fa-headset text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
-
                     <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Alpha Call Centers</h3>
+                        <div class="flex items-center gap-3 mb-2 md:mb-3">
+                            <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-rose-300 transition-colors m-0">Alpha Call Centers</h3>
+                            <div class="px-2.5 py-1 rounded bg-gradient-to-r from-rose-600 to-indigo-600 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider uppercase shadow-[0_0_10px_rgba(225,29,72,0.4)] flex items-center gap-1.5">
+                                 USA
+                            </div>
+                        </div>
                         <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             Corporate website providing professional BPO and call center services, highly optimized for lead generation, SEO, and client onboarding.
                         </p>
@@ -425,18 +883,21 @@
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative" data-aos="fade-up" data-aos-delay="100">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-                    
                     <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/innovation.png" alt="Innovation Lab" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
                             <i class="fas fa-lightbulb text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
-
                     <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Innovation Lab</h3>
+                        <div class="flex items-center gap-3 mb-2 md:mb-3">
+                            <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-rose-300 transition-colors m-0">Innovation Lab</h3>
+                            <div class="px-2.5 py-1 rounded bg-gradient-to-r from-rose-600 to-indigo-600 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider uppercase shadow-[0_0_10px_rgba(225,29,72,0.4)] flex items-center gap-1.5">
+                                 Kuwait
+                            </div>
+                        </div>
                         <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             A creative digital space showcasing innovative edges and modern web solutions with highly engaging animations and interactive UI/UX.
                         </p>
@@ -457,18 +918,21 @@
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
+                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative" data-aos="fade-up" data-aos-delay="200">
                     <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-                    
                     <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
                         <img src="src/ethere.png" alt="Ethere Art Gallery" class="scrolling-image">
                         <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
                             <i class="fas fa-palette text-4xl md:text-5xl text-white/50"></i>
                         </div>
                     </div>
-
                     <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Ethere Art Gallery</h3>
+                        <div class="flex items-center gap-3 mb-2 md:mb-3">
+                            <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-rose-300 transition-colors m-0">Ethere Art Gallery</h3>
+                            <div class="px-2.5 py-1 rounded bg-gradient-to-r from-rose-600 to-indigo-600 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider uppercase shadow-[0_0_10px_rgba(225,29,72,0.4)] flex items-center gap-1.5">
+                                 UAE
+                            </div>
+                        </div>
                         <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
                             A digital sanctuary for fine arts. An elegant online art gallery platform designed with immersive aesthetics and seamless interactions.
                         </p>
@@ -489,99 +953,258 @@
                     </div>
                 </div>
 
-                <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative">
-                    <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+               <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative" data-aos="fade-up" data-aos-delay="300">
+                        <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                        <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                            <img src="src/cyberNeuro.png" alt="Cyber Neuro AI" class="scrolling-image">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                                <i class="fas fa-brain text-4xl md:text-5xl text-white/50"></i>
+                            </div>
+                        </div>
+                        <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                            <div class="flex items-center gap-3 mb-2 md:mb-3">
+                                <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-rose-300 transition-colors m-0">Cyber Neuro AI</h3>
+                                <div class="px-2.5 py-1 rounded bg-gradient-to-r from-rose-600 to-indigo-600 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider uppercase shadow-[0_0_10px_rgba(225,29,72,0.4)] flex items-center gap-1.5">
+                                     UAE
+                                </div>
+                            </div>
+                            <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
+                                A cutting-edge platform for an AI company, showcasing neurological AI solutions with a modern, high-tech interface.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Next.js</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">OpenAI API</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Python</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Three.js</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">PostgreSQL</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                                <a href="#contact" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                    <i class="fab fa-github"></i> Request Code
+                                </a>
+                                <a href="https://cyberneuroaicompany.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                    Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative" data-aos="fade-up" data-aos-delay="400">
+                        <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                        <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                            <img src="src/alharamain.png" alt="Al-Haramain Store" class="scrolling-image">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                                <i class="fas fa-store text-4xl md:text-5xl text-white/50"></i>
+                            </div>
+                        </div>
+                        <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                            <div class="flex items-center gap-3 mb-2 md:mb-3">
+                                <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-rose-300 transition-colors m-0">Al-Haramain Store</h3>
+                                <div class="px-2.5 py-1 rounded bg-gradient-to-r from-rose-600 to-indigo-600 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider uppercase shadow-[0_0_10px_rgba(225,29,72,0.4)] flex items-center gap-1.5">
+                                     EGYPT
+                                </div>
+                            </div>
+                            <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-4 leading-relaxed">
+                                A dynamic e-commerce platform offering a diverse range of accessories. Features seamless shopping capabilities, direct WhatsApp order integration, and a custom-built secure Admin Dashboard allowing the client full control over inventory management without developer intervention.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Full-Stack</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Database</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Admin Dashboard</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">WhatsApp API</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                                <a href="https://alharamain-api.rf.gd/admin" target="_blank" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                    <i class="fas fa-user-shield"></i> Admin Panel
+                                </a>
+                                <a href="https://alharamain-api.rf.gd/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                    Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
-                        <img src="src/cyberNeuro.png" alt="Cyber Neuro AI" class="scrolling-image">
-                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
-                            <i class="fas fa-brain text-4xl md:text-5xl text-white/50"></i>
+                    <div class="group bg-neutral-900/80 backdrop-blur-md border border-neutral-700/50 rounded-2xl overflow-hidden flex flex-col h-full hover:-translate-y-2 md:hover:-translate-y-3 transition-all duration-500 hover:border-rose-500/80 hover:shadow-[0_15px_30px_rgba(225,29,72,0.3)] relative" data-aos="fade-up" data-aos-delay="500">
+                        <div class="absolute inset-0 bg-gradient-to-b from-rose-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                        <div class="h-48 md:h-56 overflow-hidden relative border-b border-neutral-800 z-10 bg-neutral-950">
+                            <img src="src/leadsup.png" alt="LeadsUp Call Center" class="scrolling-image">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                                <i class="fas fa-headset text-4xl md:text-5xl text-white/50"></i>
+                            </div>
+                            
+                            <div class="absolute top-3 right-3 z-20 px-2.5 py-1 bg-gradient-to-r from-rose-600 to-rose-800 text-white text-[9px] md:text-[10px] font-black tracking-widest uppercase rounded shadow-[0_0_15px_rgba(225,29,72,0.8)] flex items-center gap-1.5 border border-rose-400/50 animate-pulse">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 md:w-3.5 md:h-3.5">
+                                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                                </svg>
+                                Latest Launch
+                            </div>
+                            
+                        </div>
+                        <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+                            <div class="flex items-center gap-3 mb-2 md:mb-3">
+                                <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-rose-300 transition-colors m-0">LeadsUp Call Center</h3>
+                                <div class="px-2.5 py-1 rounded bg-gradient-to-r from-rose-600 to-indigo-600 text-white text-[9px] md:text-[10px] font-extrabold tracking-wider uppercase shadow-[0_0_10px_rgba(225,29,72,0.4)] flex items-center gap-1.5">
+                                     USA 
+                                </div>
+                            </div>
+                            <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-4 leading-relaxed">
+                                A professional corporate website designed for a BPO and Call Center agency. Optimized for high conversion rates, showcasing lead generation services, customer support solutions, and a modern, trustworthy digital presence.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">ES6+</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">CSS</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">#3D MODELS</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">UI/UX</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Landing Page</span>
+                                <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Vercel</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
+                                <a href="#contact" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
+                                    <i class="fab fa-github"></i> Request Code
+                                </a>
+                                <a href="https://leadsupcallcenter.com/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
+                                    Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="p-6 md:p-8 flex flex-col flex-grow relative z-10">
-                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3 group-hover:text-rose-300 transition-colors">Cyber Neuro AI</h3>
-                        <p class="text-gray-300 text-xs md:text-sm mb-4 md:mb-6 line-clamp-3 leading-relaxed">
-                            A cutting-edge platform for an AI company, showcasing neurological AI solutions with a modern, high-tech interface.
-                        </p>
-                        <div class="flex flex-wrap gap-1.5 md:gap-2 mb-6 md:mb-8 mt-auto">
-                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Next.js</span>
-                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">OpenAI API</span>
-                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Python</span>
-                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">Three.js</span>
-                            <span class="text-[9px] md:text-[10px] font-bold bg-black/60 text-gray-200 px-2 py-1 rounded-sm border border-neutral-700">PostgreSQL</span>
-                        </div>
-                        <div class="flex justify-between items-center border-t border-neutral-800 pt-4 md:pt-5">
-                            <a href="#contact" class="text-gray-300 hover:text-white transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider">
-                                <i class="fab fa-github"></i> Request Code
-                            </a>
-                            <a href="https://cyberneuroaicompany.vercel.app/" target="_blank" class="text-rose-400 hover:text-rose-300 transition-colors text-xs md:text-sm font-bold flex items-center gap-2 uppercase tracking-wider drop-shadow-[0_0_5px_rgba(225,29,72,0.4)]">
-                                Live Demo <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                </div> </div> </section>
 
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="relative py-24 z-10 mt-auto overflow-hidden bg-black border-none">
+    <footer id="contact" class="relative pt-24 pb-10 z-10 mt-auto overflow-hidden bg-black/80 border-t border-rose-900/30 font-tech">
         
         <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none"></div>
 
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-rose-700/30 blur-[100px] animate-pulse" style="animation-duration: 8s;"></div>
-            <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-purple-700/30 blur-[120px] animate-pulse" style="animation-duration: 10s; animation-delay: 2s;"></div>
-            <div class="absolute top-[20%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-blue-800/20 blur-[100px] animate-pulse" style="animation-duration: 12s; animation-delay: 4s;"></div>
+            <div class="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-rose-700/20 blur-[100px] animate-pulse" style="animation-duration: 8s;"></div>
+            <div class="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-purple-700/20 blur-[120px] animate-pulse" style="animation-duration: 10s; animation-delay: 2s;"></div>
         </div>
 
-        <div class="container mx-auto px-4 md:px-6 text-center relative z-20">
+        <div class="container mx-auto px-4 md:px-6 relative z-20">
             
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight rgb-breathing-text uppercase">
-                Let's Build Together
-            </h2>
-            
-            <p class="text-sm md:text-base text-gray-300 mb-10 md:mb-14 max-w-lg mx-auto drop-shadow-md font-medium px-2">
-                Currently open for new opportunities and freelance projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-12 md:mb-16">
-                <a href="https://wa.me/+201020955429" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-green-500/80 hover:border-green-400 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(34,197,94,0.6)]">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                <a href="https://linkedin.com/in/ezz-eldin-ahmed22/" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-blue-600/80 hover:border-blue-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(37,99,235,0.6)]">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/ezzeldinx" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-gray-700/80 hover:border-gray-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="mailto:ezzeldin55x@gmail.com" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-rose-600/80 hover:border-rose-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(225,29,72,0.6)]">
-                    <i class="fas fa-envelope"></i>
-                </a>
+            <div class="text-center mb-16 md:mb-24">
+                <img src="src/LOGO EE.png" alt="E.E Logo" class="w-20 h-20 md:w-28 md:h-28 mx-auto mb-6 object-contain drop-shadow-[0_0_25px_rgba(225,29,72,0.5)] mix-blend-lighten hover:scale-110 transition-transform duration-300" data-aos="fade-up">                <h2 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight rgb-breathing-text uppercase" data-aos="fade-up">
+                    Let's Build Together
+                </h2>
+                
+                <p class="text-sm md:text-base text-gray-300 mb-10 max-w-lg mx-auto drop-shadow-md font-medium px-2" data-aos="fade-up" data-aos-delay="100">
+                    Currently open for new opportunities and freelance projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4 md:gap-6" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://wa.me/+201020955429" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-green-500/80 hover:border-green-400 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(34,197,94,0.6)]">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://instagram.com/ee.technologies" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-pink-600/80 hover:border-pink-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(219,39,119,0.6)]">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/ezz-eldin-ahmed22/" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-blue-600/80 hover:border-blue-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(37,99,235,0.6)]">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/ezzeldinx" target="_blank" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-gray-700/80 hover:border-gray-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:ezzeldin55x@gmail.com" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl text-gray-300 hover:text-white hover:bg-rose-600/80 hover:border-rose-500 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(225,29,72,0.6)]">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
             </div>
-            
-            <p class="text-gray-400 text-xs md:text-sm font-bold tracking-widest uppercase drop-shadow-md">© 2026 Ezz Eldin. Engineered for Dominance.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 pt-10 border-t border-neutral-800/80 text-left" data-aos="fade-up" data-aos-delay="300">
+                
+                <div>
+                    <div class="font-logo text-lg tracking-widest text-white flex items-center gap-3 mb-4">
+                        <img src="src/LOGO EE.png" alt="Logo" class="w-8 h-8 object-contain drop-shadow-[0_0_10px_rgba(225,29,72,0.5)] mix-blend-lighten">                        E.E Tech.
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-xs">
+                        Architecting scalable digital ecosystems and delivering flawless performance without compromise.
+                    </p>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-950/30 border border-green-800/50 text-green-400 text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Available for work
+                    </div>
+                </div>
+
+                <div class="md:pl-10">
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-widest text-sm">Navigation</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#hero" class="text-gray-400 hover:text-rose-400 transition-colors text-sm">Home Overview</a></li>
+                        <li><a href="#expertise" class="text-gray-400 hover:text-rose-400 transition-colors text-sm">Core Expertise</a></li>
+                        <li><a href="#experience" class="text-gray-400 hover:text-rose-400 transition-colors text-sm">Current Command</a></li>
+                        <li><a href="#field-ops" class="text-gray-400 hover:text-rose-400 transition-colors text-sm">Field Ops</a></li>
+                        <li><a href="#work" class="text-gray-400 hover:text-rose-400 transition-colors text-sm">Selected Works</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-widest text-sm">Contact Details</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-envelope text-rose-500 mt-1"></i>
+                            <a href="mailto:ezzeldin55x@gmail.com" class="text-gray-400 hover:text-white transition-colors text-sm">ezzeldin55x@gmail.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-rose-500 mt-1"></i>
+                            <span class="text-gray-400 text-sm">Alexandria, Egypt<br>Willing to relocate / Remote</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-phone-alt text-rose-500 mt-1"></i>
+                            <span class="text-gray-400 text-sm">+20 102 095 5429</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-neutral-800/80 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-[10px] md:text-xs font-bold tracking-widest uppercase text-center md:text-left">© 2026 E.E Technologies. All rights reserved.</p>
+                <p class="text-rose-900/60 text-[10px] md:text-xs font-bold tracking-widest uppercase text-center md:text-right">Engineered for Dominance.</p>
+            </div>
+
         </div>
     </footer>
 
+    <button id="backToTopBtn" class="btt-hidden fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 w-12 h-12 md:w-14 md:h-14 bg-rose-600/30 hover:bg-rose-500/50 backdrop-blur-md border border-white/10 text-white rounded-full flex items-center justify-center text-lg md:text-xl transition-all duration-500 shadow-[0_0_20px_rgba(225,29,72,0.4)]">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
-        // --- 1. LOADER 3D VORTEX LOGIC (Optimized for Mobile) ---
+        // --- Initialize AOS Animations ---
+        AOS.init({ duration: 400, easing: 'ease-out', once: true, offset: 10 });
+        // --- Back to Top Logic ---
+        const bttBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                bttBtn.classList.remove('btt-hidden');
+                bttBtn.classList.add('btt-visible');
+            } else {
+                bttBtn.classList.remove('btt-visible');
+                bttBtn.classList.add('btt-hidden');
+            }
+        });
+
+        bttBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        // --- 1. LOADER 3D VORTEX LOGIC ---
         const loaderWrapper = document.getElementById('loader-wrapper');
         const loaderText = document.getElementById('loading-text');
 
-        // Failsafe: Force hide loader after 4 seconds to prevent getting stuck
         let loaderKilled = false;
         const forceKillLoader = () => {
             if (loaderKilled) return;
             loaderKilled = true;
             loaderWrapper.style.opacity = '0';
             document.body.classList.remove('loading-active');
-            setTimeout(() => {
-                loaderWrapper.style.display = 'none';
-            }, 800);
+            setTimeout(() => { loaderWrapper.style.display = 'none'; }, 800);
+            
+            setTimeout(initSkills3D, 500);
+            setTimeout(initGithubGrid, 600);
         };
-        setTimeout(forceKillLoader, 4000); // Hard limit 4 seconds
+        setTimeout(forceKillLoader, 4000);
 
         const isMobile = window.innerWidth < 768;
         
@@ -590,18 +1213,15 @@
             loaderScene.fog = new THREE.FogExp2(0x000000, 0.0015);
             const loaderCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
             loaderCamera.position.z = 800;
-            
             const loaderRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             loaderRenderer.setPixelRatio(window.devicePixelRatio);
             loaderRenderer.setSize(window.innerWidth, window.innerHeight);
             document.getElementById('loader-webgl').appendChild(loaderRenderer.domElement);
 
-            // Reduce particles drastically on mobile to prevent crash/freeze
             const particleCount = isMobile ? 1500 : 5000;
             const geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(particleCount * 3);
             const colors = new Float32Array(particleCount * 3);
-
             const color1 = new THREE.Color(0xe11d48); 
             const color2 = new THREE.Color(0x4c0519); 
             const color3 = new THREE.Color(0x000000); 
@@ -610,7 +1230,6 @@
                 const z = (Math.random() - 0.5) * 2000;
                 const radius = Math.sqrt(Math.abs(z)) * 10 + (Math.random() * 50);
                 const theta = Math.random() * Math.PI * 2;
-
                 positions[i * 3] = radius * Math.cos(theta);
                 positions[i * 3 + 1] = radius * Math.sin(theta);
                 positions[i * 3 + 2] = z;
@@ -619,48 +1238,38 @@
                 let finalColor = color1.clone();
                 if (mixRatio > 0.6) finalColor = color2.clone();
                 if (mixRatio > 0.9) finalColor = color3.clone();
-
-                colors[i * 3] = finalColor.r;
-                colors[i * 3 + 1] = finalColor.g;
-                colors[i * 3 + 2] = finalColor.b;
+                colors[i * 3] = finalColor.r; colors[i * 3 + 1] = finalColor.g; colors[i * 3 + 2] = finalColor.b;
             }
 
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
             geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-            const material = new THREE.PointsMaterial({
-                size: isMobile ? 3.0 : 2.5,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.8,
-                blending: THREE.AdditiveBlending
-            });
-
+            const material = new THREE.PointsMaterial({ size: isMobile ? 3.0 : 2.5, vertexColors: true, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
             const vortex = new THREE.Points(geometry, material);
             loaderScene.add(vortex);
 
-            let loaderAnimId;
-            let pullSpeed = 0;
-            let rotationSpeed = 0.002;
+            let loaderAnimId; let pullSpeed = 0; let rotationSpeed = 0.002;
 
             function animateLoader() {
-                if (loaderKilled) {
-                    cancelAnimationFrame(loaderAnimId);
-                    loaderRenderer.dispose();
-                    return;
+                if (loaderKilled) { 
+                    cancelAnimationFrame(loaderAnimId); 
+                    
+                    // --- KILL WEBGL CONTEXT TO FREE MOBILE RAM ---
+                    loaderRenderer.forceContextLoss(); 
+                    loaderRenderer.dispose(); 
+                    loaderRenderer.domElement.remove();
+                    return; 
                 }
                 loaderAnimId = requestAnimationFrame(animateLoader);
-                
-                vortex.rotation.z += rotationSpeed;
-                loaderCamera.position.z -= pullSpeed;
-
+                vortex.rotation.z += rotationSpeed; loaderCamera.position.z -= pullSpeed;
                 const positionsArray = vortex.geometry.attributes.position.array;
-                for(let i=0; i<particleCount; i++) {
-                    positionsArray[i*3] *= 0.9999; 
-                    positionsArray[i*3+1] *= 0.9999;
-                }
+                for(let i=0; i<particleCount; i++) { positionsArray[i*3] *= 0.9999; positionsArray[i*3+1] *= 0.9999; }
                 vortex.geometry.attributes.position.needsUpdate = true;
-
+                
+                if (material.opacity > 0 && pullSpeed > 2) {
+                    material.opacity -= 0.04; 
+                }
+                
                 loaderRenderer.render(loaderScene, loaderCamera);
             }
             animateLoader();
@@ -668,98 +1277,273 @@
             setTimeout(() => {
                 if(loaderKilled) return;
                 loaderText.style.opacity = '0';
-                loaderText.style.transform = 'translate(-50%, -50%) scale(3)';
+                /* شيلنا الإزاحة وخليناها تكبر في النص بالظبط */
+                loaderText.style.transform = 'scale(5)'; 
                 
                 let speedInterval = setInterval(() => {
                     if(loaderKilled) clearInterval(speedInterval);
-                    pullSpeed += isMobile ? 0.8 : 0.5; // Faster pull on mobile
-                    rotationSpeed += 0.0005;
-                    if (pullSpeed > 20) clearInterval(speedInterval);
+                    pullSpeed += isMobile ? 1.5 : 1.2; /* سرعت الدخول جوة الدوامة شوية عشان تبقى حماسية */
+                    rotationSpeed += 0.001;
+                    if (pullSpeed > 25) clearInterval(speedInterval);
                 }, 50);
             }, 1200); 
 
-            setTimeout(forceKillLoader, 3000); // Normal hide time
+            setTimeout(forceKillLoader, 3000); 
+        } catch (e) { console.error("WebGL Loader Error", e); forceKillLoader(); }
 
-        } catch (e) {
-            console.error("WebGL Loader Error", e);
-            forceKillLoader(); // Fallback if Three.js fails completely
-        }
-
-        // --- 2. VANTA BACKGROUNDS (Main Site) ---
+        // --- 2. VANTA BACKGROUNDS ---
+        // --- 2. VANTA BACKGROUNDS (DESKTOP OPTIMIZED) ---
         setTimeout(() => {
             try {
-                VANTA.NET({
-                    el: "#vanta-canvas",
-                    mouseControls: true,
-                    touchControls: true,
-                    gyroControls: false,
-                    minHeight: 200.00,
-                    minWidth: 200.00,
-                    scale: 1.00,
-                    scaleMobile: 1.00,
-                    color: 0x9f1239,
-                    backgroundColor: 0x000000,
-                    points: isMobile ? 8.00 : 12.00, // Fewer points on mobile
-                    maxDistance: 22.00,
-                    spacing: 16.00,
-                    showDots: true
+                VANTA.NET({ 
+                    el: "#vanta-canvas", 
+                    mouseControls: !isMobile, 
+                    touchControls: false, 
+                    minHeight: 200.00, 
+                    minWidth: 200.00, 
+                    scale: 1.00, 
+                    scaleMobile: 1.00, 
+                    color: 0x9f1239, 
+                    backgroundColor: 0x000000, 
+                    backgroundAlpha: 0.0, 
+                    // قللنا النقط للديسكتوب من 12 لـ 9، ووسعنا المسافات سنة بسيطة
+                    points: isMobile ? 4.00 : 9.00, 
+                    maxDistance: isMobile ? 15.00 : 20.00, 
+                    spacing: isMobile ? 25.00 : 18.00, 
+                    showDots: true 
                 });
-
-                VANTA.NET({
-                    el: "#vanta-work-bg",
-                    mouseControls: true,
-                    touchControls: true,
-                    gyroControls: false,
-                    minHeight: 200.00,
-                    minWidth: 200.00,
-                    scale: 1.00,
-                    scaleMobile: 1.00,
-                    color: 0xf43f5e, 
-                    backgroundColor: 0x2a0410, 
-                    points: isMobile ? 6.00 : 10.00,
-                    maxDistance: 20.00,
-                    spacing: 18.00,
-                    showDots: true
-                });
-
-                VANTA.WAVES({
-                    el: "#footer-vanta",
-                    mouseControls: false,
-                    touchControls: false,
-                    gyroControls: false,
-                    minHeight: 200.00,
-                    minWidth: 200.00,
-                    scale: 1.00,
-                    scaleMobile: 1.00,
-                    color: 0x4c0519,
-                    shininess: 35.00,
-                    waveHeight: 15.00,
-                    waveSpeed: 0.70,
-                    zoom: 0.85
-                });
-            } catch(e) {
-                console.error("Vanta initialization error", e);
-            }
-        }, 1000); // Initialize Vanta slightly after loader starts to distribute load
+            } catch(e) { console.error("Vanta initialization error", e); }
+        }, 1000);
 
         // --- 3. MOBILE MENU LOGIC ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
+        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); mobileMenu.classList.toggle('flex'); });
+        mobileLinks.forEach(link => { link.addEventListener('click', () => { if(window.innerWidth < 768) { mobileMenu.classList.add('hidden'); mobileMenu.classList.remove('flex'); } }); });
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if(window.innerWidth < 768) {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('flex');
+        // --- 4. GITHUB ACTIVITY GRID LOGIC ---
+        function initGithubGrid() {
+            const grid = document.getElementById('github-grid');
+            if(!grid) return;
+            const cols = isMobile ? 24 : 45; 
+            const colors = [
+                'bg-neutral-900 border border-neutral-800', 
+                'bg-rose-950', 
+                'bg-rose-800', 
+                'bg-rose-600', 
+                'bg-rose-400'
+            ];
+            
+            for (let i = 0; i < cols; i++) {
+                const col = document.createElement('div');
+                col.className = 'flex flex-col gap-1 md:gap-1.5';
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement('div');
+                    const rand = Math.random();
+                    let colorIdx = 0;
+                    if (rand > 0.6) colorIdx = 1;
+                    if (rand > 0.8) colorIdx = 2;
+                    if (rand > 0.92) colorIdx = 3;
+                    if (rand > 0.97) colorIdx = 4;
+                    
+                    cell.className = `w-2.5 h-2.5 md:w-3 md:h-3 rounded-sm ${colors[colorIdx]} transition-colors duration-300 hover:bg-white`;
+                    col.appendChild(cell);
                 }
+                grid.appendChild(col);
+            }
+        }
+
+        // --- 5. INTERACTIVE 3D SKILLS SPHERE ---
+        function initSkills3D() {
+            const container = document.getElementById('skills-3d-container');
+            const canvas = document.getElementById('skills-canvas');
+            const htmlNodesContainer = document.getElementById('skills-html-nodes');
+            
+            if (!container || !canvas || !htmlNodesContainer) return;
+
+            let width = container.clientWidth;
+            let height = container.clientHeight;
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
+            camera.position.z = isMobile ? 650 : 550; 
+            
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            
+            const radius = isMobile ? 150 : 200;
+            const geometry = new THREE.IcosahedronGeometry(radius, 1); 
+            
+            const material = new THREE.LineBasicMaterial({ color: 0xe11d48, transparent: true, opacity: 0.15, linewidth: 1 });
+            const wireframe = new THREE.LineSegments(new THREE.WireframeGeometry(geometry), material);
+            scene.add(wireframe);
+            
+            const pos = geometry.getAttribute('position');
+            const uniqueVertices = [];
+            for(let i=0; i<pos.count; i++) {
+                const v = new THREE.Vector3().fromBufferAttribute(pos, i);
+                let exists = false;
+                for(let j=0; j<uniqueVertices.length; j++) {
+                    if(uniqueVertices[j].distanceTo(v) < 0.1) { exists = true; break; }
+                }
+                if(!exists) uniqueVertices.push(v);
+            }
+            
+            const skills = [
+                { name: 'React.js', html: '<i class="fab fa-react text-xl md:text-2xl" style="color: #61DAFB"></i>', color: '#61DAFB' },
+                { name: 'Next.js', html: '<span class="font-bold text-sm md:text-lg text-white">Nx</span>', color: '#FFFFFF' },
+                { name: 'TypeScript', html: '<span class="font-bold text-sm md:text-lg" style="color: #3178C6">TS</span>', color: '#3178C6' },
+                { name: 'JavaScript', html: '<i class="fab fa-js text-xl md:text-2xl" style="color: #F7DF1E"></i>', color: '#F7DF1E' },
+                { name: 'Vue.js', html: '<i class="fab fa-vuejs text-xl md:text-2xl" style="color: #4FC08D"></i>', color: '#4FC08D' },
+                { name: 'Tailwind', html: '<i class="fas fa-wind text-lg md:text-xl" style="color: #06B6D4"></i>', color: '#06B6D4' },
+                { name: 'Node.js', html: '<i class="fab fa-node-js text-xl md:text-2xl" style="color: #339939"></i>', color: '#339939' },
+                { name: 'Python', html: '<i class="fab fa-python text-xl md:text-2xl" style="color: #3776AB"></i>', color: '#3776AB' },
+                { name: 'PostgreSQL', html: '<i class="fas fa-database text-lg md:text-xl" style="color: #336791"></i>', color: '#336791' },
+                { name: 'MongoDB', html: '<i class="fas fa-leaf text-lg md:text-xl" style="color: #47A248"></i>', color: '#47A248' },
+                { name: 'Docker', html: '<i class="fab fa-docker text-xl md:text-2xl" style="color: #2496ED"></i>', color: '#2496ED' },
+                { name: 'AWS', html: '<i class="fab fa-aws text-xl md:text-2xl" style="color: #FF9900"></i>', color: '#FF9900' },
+                { name: 'Kubernetes', html: '<span class="font-bold text-sm md:text-lg" style="color: #326CE5">K8s</span>', color: '#326CE5' },
+                { name: 'Linux', html: '<i class="fab fa-linux text-xl md:text-2xl" style="color: #FFF"></i>', color: '#FFFFFF' },
+                { name: 'Git', html: '<i class="fab fa-git-alt text-xl md:text-2xl" style="color: #F05032"></i>', color: '#F05032' },
+                { name: 'GraphQL', html: '<span class="font-bold text-[12px] md:text-base" style="color: #E10098">GQL</span>', color: '#E10098' },
+                { name: 'Three.js', html: '<span class="font-bold text-[12px] md:text-base text-white">3D</span>', color: '#FFFFFF' },
+                { name: 'Figma', html: '<i class="fab fa-figma text-xl md:text-2xl" style="color: #F24E1E"></i>', color: '#F24E1E' },
+                { name: 'Express.js', html: '<span class="font-bold text-xs md:text-sm text-gray-300">EX</span>', color: '#D1D5DB' },
+                { name: 'Prisma', html: '<span class="font-bold text-xs md:text-sm" style="color: #5A67D8">PR</span>', color: '#5A67D8' },
+                { name: 'Redux', html: '<i class="fas fa-code-branch text-lg md:text-xl" style="color: #764ABC"></i>', color: '#764ABC' },
+                { name: 'Firebase', html: '<i class="fas fa-fire text-lg md:text-xl" style="color: #FFCA28"></i>', color: '#FFCA28' },
+                { name: 'Supabase', html: '<span class="font-bold text-xs md:text-sm" style="color: #3ECF8E">SB</span>', color: '#3ECF8E' },
+                { name: 'Redis', html: '<i class="fas fa-layer-group text-lg md:text-xl" style="color: #DC382D"></i>', color: '#DC382D' },
+                { name: 'Nginx', html: '<span class="font-bold text-xs md:text-sm" style="color: #009639">NG</span>', color: '#009639' },
+                { name: 'Ubuntu', html: '<i class="fab fa-ubuntu text-lg md:text-xl" style="color: #E95420"></i>', color: '#E95420' },
+                { name: 'Bash', html: '<i class="fas fa-terminal text-lg md:text-xl text-white"></i>', color: '#FFFFFF' },
+                { name: 'Vercel', html: '<span class="font-bold text-xs md:text-sm text-white">▲</span>', color: '#FFFFFF' },
+                { name: 'Github Actions', html: '<i class="fab fa-github text-lg md:text-xl text-white"></i>', color: '#FFFFFF' },
+                { name: 'Terraform', html: '<span class="font-bold text-[10px] md:text-xs" style="color: #7B42BC">TF</span>', color: '#7B42BC' },
+                { name: 'Ansible', html: '<span class="font-bold text-[10px] md:text-xs" style="color: #EE0000">AN</span>', color: '#EE0000' },
+                { name: 'Jenkins', html: '<i class="fab fa-jenkins text-lg md:text-xl" style="color: #D33833"></i>', color: '#D33833' },
+                { name: 'GSAP', html: '<span class="font-bold text-xs md:text-sm" style="color: #88CE02">GS</span>', color: '#88CE02' },
+                { name: 'Framer Motion', html: '<span class="font-bold text-xs md:text-sm" style="color: #0055FF">FM</span>', color: '#0055FF' },
+                { name: 'Jest', html: '<span class="font-bold text-[10px] md:text-xs" style="color: #C21325">JST</span>', color: '#C21325' },
+                { name: 'Cypress', html: '<span class="font-bold text-[10px] md:text-xs" style="color: #17202C">CY</span>', color: '#69D3A7' },
+                { name: 'Vite', html: '<span class="font-bold text-[10px] md:text-xs" style="color: #646CFF">VT</span>', color: '#646CFF' },
+                { name: 'Webpack', html: '<span class="font-bold text-[10px] md:text-xs" style="color: #8DD6F9">WP</span>', color: '#8DD6F9' },
+                { name: 'SASS', html: '<i class="fab fa-sass text-lg md:text-xl" style="color: #CC6699"></i>', color: '#CC6699' },
+                { name: 'REST API', html: '<i class="fas fa-network-wired text-lg md:text-xl" style="color: #009688"></i>', color: '#009688' },
+                { name: 'WebSockets', html: '<i class="fas fa-plug text-lg md:text-xl" style="color: #FF5E00"></i>', color: '#FF5E00' },
+                { name: 'Django', html: '<span class="font-bold text-[10px] md:text-xs" style="color: #092E20">DJ</span>', color: '#092E20' }
+            ];
+            
+            const nodes = [];
+            
+            uniqueVertices.forEach((v, index) => {
+                const skill = skills[index % skills.length]; 
+                const el = document.createElement('div');
+                el.className = 'skill-node pointer-events-auto cursor-pointer';
+                el.style.setProperty('--hover-color', skill.color);
+                
+                el.innerHTML = `
+                    <div class="skill-icon-wrapper w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#0b0b0b] border border-neutral-700/80 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.8)] relative z-10">
+                        ${skill.html}
+                    </div>
+                    <div class="skill-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1 bg-[#111] border border-neutral-700 text-white text-[10px] md:text-xs font-bold rounded shadow-lg whitespace-nowrap z-20">
+                        ${skill.name}
+                    </div>
+                `;
+                htmlNodesContainer.appendChild(el);
+                nodes.push({ vector: v, element: el });
             });
-        });
+            
+            let isDragging = false;
+            let previousPosition = { x: 0, y: 0 };
+            let targetRotation = { x: 0, y: 0 };
+            let currentRotation = { x: 0, y: 0 };
+            
+            const onDown = (x, y) => { isDragging = true; previousPosition = { x, y }; };
+            const onMove = (x, y) => {
+                if (isDragging) {
+                    const deltaX = x - previousPosition.x;
+                    const deltaY = y - previousPosition.y;
+                    targetRotation.x += deltaY * 0.005;
+                    targetRotation.y += deltaX * 0.005;
+                    previousPosition = { x, y };
+                }
+            };
+            const onUp = () => { isDragging = false; };
+
+            container.addEventListener('mousedown', (e) => onDown(e.clientX, e.clientY));
+            window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
+            window.addEventListener('mouseup', onUp);
+            
+            container.addEventListener('touchstart', (e) => onDown(e.touches[0].clientX, e.touches[0].clientY), {passive: true});
+            window.addEventListener('touchmove', (e) => onMove(e.touches[0].clientX, e.touches[0].clientY), {passive: true});
+            window.addEventListener('touchend', onUp);
+            
+            window.addEventListener('resize', () => {
+                width = container.clientWidth;
+                height = container.clientHeight;
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+            });
+
+            function animateNodes() {
+                requestAnimationFrame(animateNodes);
+                
+                if (!isDragging) { targetRotation.y += 0.002; targetRotation.x += 0.001; }
+                
+                currentRotation.x += (targetRotation.x - currentRotation.x) * 0.1;
+                currentRotation.y += (targetRotation.y - currentRotation.y) * 0.1;
+                
+                wireframe.rotation.x = currentRotation.x;
+                wireframe.rotation.y = currentRotation.y;
+                
+                nodes.forEach(node => {
+                    const worldPos = node.vector.clone();
+                    worldPos.applyMatrix4(wireframe.matrixWorld); 
+                    const projected = worldPos.clone().project(camera);
+                    
+                    const x = (projected.x * width * 0.5);
+                    const y = -(projected.y * height * 0.5);
+                    
+                    const normalizedDepth = (worldPos.z + radius) / (radius * 2);
+                    const scale = 0.4 + (normalizedDepth * 0.6); 
+                    const opacity = 0.2 + (normalizedDepth * 0.8); 
+                    const zIndex = Math.round(normalizedDepth * 100);
+                    
+                    node.element.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`;
+                    node.element.style.opacity = opacity;
+                    node.element.style.zIndex = zIndex;
+                    
+                    const iconWrapper = node.element.querySelector('.skill-icon-wrapper');
+                    if (normalizedDepth < 0.4) {
+                        iconWrapper.style.filter = 'grayscale(100%) brightness(0.4)';
+                    } else {
+                        iconWrapper.style.filter = 'none';
+                    }
+                });
+                
+                renderer.render(scene, camera);
+            }
+            // --- SMART RENDERING (PAUSE WHEN OUT OF VIEW) ---
+            let skillsAnimId;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // لو السكشن ظهر في الشاشة، شغل الأنميشن
+                        if (!skillsAnimId) animateNodes();
+                    } else {
+                        // لو السكشن خرج برا الشاشة، جمد الأنميشن ووفر رامات
+                        cancelAnimationFrame(skillsAnimId);
+                        skillsAnimId = null;
+                    }
+                });
+            }, { threshold: 0.1 }); // يشتغل لما 10% من السكشن يظهر
+
+            observer.observe(container);
+        }
     </script>
 </body>
 </html>
